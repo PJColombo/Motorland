@@ -13,7 +13,7 @@ import Negocio.Vehiculo.TVehiculo;
 
 
 public interface DAOAlquiler {
-//aa
+	
 	public int create(TAlquiler t) throws Exception;
 	public int delete(int id);
 	public int update(TAlquiler t);
@@ -22,4 +22,6 @@ public interface DAOAlquiler {
 	public int addVehiculo(TAlquiler t, TVehiculo v);
 	public int deleteVehiculo(TAlquiler t, TVehiculo v);
 	public ArrayList<TVehiculo> obtenVehiculosNoCoincidentes (Calendar fechaI, Calendar fechaF) throws Exception;
+	public boolean alquilerSolapa(Calendar fechaI, Calendar fechaF);
+	public ArrayList<TVehiculo> obtenVehiculosAlquilados(int id); 
 }

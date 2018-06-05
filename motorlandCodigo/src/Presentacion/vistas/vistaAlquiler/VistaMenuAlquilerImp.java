@@ -3,7 +3,11 @@
  */
 package Presentacion.vistas.vistaAlquiler;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+
+import com.mysql.fabric.xmlrpc.base.Array;
 
 import Negocio.Alquiler.TAlquiler;
 import Presentacion.comandos.listadecomandos.ListaComandos;
@@ -80,8 +84,17 @@ public class VistaMenuAlquilerImp extends VistaMenuAlquiler {
 		
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARLISTAALQUILER){
-			String mensajeLista = "";
+			ArrayList<TAlquiler> lista = (ArrayList<TAlquiler>) contexto.getData();
+			TAlquiler[] listaConFormato = new TAlquiler[lista.size()];
+			lista.toArray(listaConFormato);
+			if (lista != null) 
+				vAlquiler.muestraAlquileres(listaConFormato);
+			else 
+				JOptionPane.showMessageDialog(vAlquiler, "No hay alquileres para listar.", "Lista alquileres", JOptionPane.INFORMATION_MESSAGE);
 		
+		}
+		else if(contexto.getEvent() == ListaComandos.CERRAR_VISTA_ALQUILER) {
+			vAlquiler.setVisible(false);
 		}
 		
 	}

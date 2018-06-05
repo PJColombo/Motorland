@@ -36,7 +36,8 @@ public class VistaPrincipalImp extends VistaPrincipal {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void update(Context contexto) {
-		if(contexto.getEvent() == ListaComandos.VISTAMENUPRINCIPAL){
+		if(contexto.getEvent() == ListaComandos.VISTAMENUPRINCIPAL ||
+				contexto.getEvent() == ListaComandos.CERRAR_VISTA_ALQUILER){
 			java.awt.EventQueue.invokeLater(new Runnable() {
 	            public void run() {
 	            	vPrincipal.setVisible(true);

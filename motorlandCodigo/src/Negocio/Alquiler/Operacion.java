@@ -4,5 +4,6 @@ public enum Operacion {
 
 	AÑADIR,
 	MODIFICAR,
-	ELIMINAR;
+	ELIMINAR,
+	NADA;
 }

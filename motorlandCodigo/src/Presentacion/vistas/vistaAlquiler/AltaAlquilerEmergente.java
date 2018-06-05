@@ -9,6 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import Negocio.Alquiler.Accion;
 import Negocio.Alquiler.CalculadorPrecios;
 import Negocio.Alquiler.TAlquiler;
 import Negocio.Alquiler.TLineaAlquiler;
@@ -29,6 +30,7 @@ import Presentacion.vistas.vistaCalendario.DateLabelFormatter;
 public class AltaAlquilerEmergente extends javax.swing.JFrame {
 
 	private TAlquiler tAlquiler; 
+	private Accion tipoAccion; 
 	
     /**
      * Creates new form AltaAlquilerEmergente
@@ -40,9 +42,10 @@ public class AltaAlquilerEmergente extends javax.swing.JFrame {
     	initComponents();
     }
 
-    public  AltaAlquilerEmergente() {
+    public  AltaAlquilerEmergente(Accion tipo) {
     	this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/MotorLand.png")).getImage());
     	tAlquiler = null; 
+    	tipoAccion = tipo;
     	initComponents();
 	}
     
@@ -160,6 +163,10 @@ public class AltaAlquilerEmergente extends javax.swing.JFrame {
         importeL.setText("Importe:");
 
         importeTF.setEditable(false);
+        
+     /*   if(tipoAccion == Accion.MODIFICACION)
+        	importeTF.setText("" + tAlquiler.getCosteTotal());*/
+        
         importeTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importeTFActionPerformed(evt);
@@ -343,20 +350,25 @@ public class AltaAlquilerEmergente extends javax.swing.JFrame {
 
     private void confAlquilerBActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {                                              
         // TODO add your handling code here:
-    	TVehiculo v;
-    	double precio; 
-    	double precioTotal = 0; 
-    	for(int i = 0; i < vAgregadosModel.size(); i++) {
-    		v = vAgregadosModel.get(i);
-    		
-    		precio = CalculadorPrecios.calculaPrecioAgregado(v.getCoste());
-			tAlquiler.addTolistaAlquilados(v.getId(), new TLineaAlquiler(precio));
-			
-			precioTotal += precio;
+    	if(tipoAccion == Accion.ALTA) {
+	    	TVehiculo v;
+	    	double precio; 
+	    	double precioTotal = 0; 
+	    	for(int i = 0; i < vAgregadosModel.size(); i++) {
+	    		v = vAgregadosModel.get(i);
+	    		
+	    		precio = CalculadorPrecios.calculaPrecioAgregado(v.getCoste());
+				tAlquiler.addTolistaAlquilados(v.getId(), new TLineaAlquiler(precio));
+				
+				precioTotal += precio;
+	    	}
+	    	System.out.println(precioTotal);
+	    	tAlquiler.setCosteTotal(Double.parseDouble(importeTF.getText()));
+	    	Controller.getInstance().run(ListaComandos.NEGOCIOALTAALQUILER, tAlquiler);
     	}
-    	System.out.println(precioTotal);
-    	tAlquiler.setCosteTotal(Double.parseDouble(importeTF.getText()));
-    	Controller.getInstance().run(ListaComandos.NEGOCIOALTAALQUILER, tAlquiler);
+    	else if(tipoAccion == Accion.MODIFICACION) {
+    		
+    	}
     }                                             
 
     private void agrVehiculoBActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -432,7 +444,7 @@ public class AltaAlquilerEmergente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AltaAlquilerEmergente().setVisible(true);
+                new AltaAlquilerEmergente(Accion.MODIFICACION).setVisible(true);
             }
         });
     }

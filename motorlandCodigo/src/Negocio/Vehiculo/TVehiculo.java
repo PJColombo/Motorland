@@ -12,6 +12,8 @@ public class TVehiculo {
 	private int numBaterias;
 	private Boolean activo;
 	private double coste;
+	
+	public TVehiculo() {}; 
 	public TVehiculo(int id, String modelo, String matricula, String color, int numBaterias,double coste, boolean activo){
 		this.id = id;
 		this.modelo = modelo;

@@ -3,7 +3,12 @@
  */
 package Presentacion.comandos.listadecomandos.negocio.Alquiler;
 
+import java.util.ArrayList;
+
+import Negocio.Alquiler.TAlquiler;
+import Negocio.FactoriaSA.ASFactory;
 import Presentacion.comandos.Command;
+import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
 
 /** 
@@ -19,9 +24,15 @@ public class ListadoAlquileresCommand implements Command {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public Context execute(Object data) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
+		ArrayList<TAlquiler> lista = new ArrayList<>();
+		
+		try {
+			lista = ASFactory.getInstance().createSAAlquiler().listadoAlquileres();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new Context(ListaComandos.MOSTRARLISTAALQUILER, lista); 
 	}
 }

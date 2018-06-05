@@ -12,6 +12,8 @@ import Presentacion.controlador.Controller;
 import Presentacion.vistas.vistaCalendario.Calendario;
 
 public class AlquilerGUI extends javax.swing.JFrame {
+	
+	private static final String SEPARATOR = "--------------------------------------------------------------------------------------";
 
     /**
      * Creates new form Alquiler
@@ -25,6 +27,9 @@ public class AlquilerGUI extends javax.swing.JFrame {
     public void muestraAlquileres(TAlquiler... alquileres) {
     	for (TAlquiler t : alquileres) {
 			alquilerTA.append(t.toString());
+			alquilerTA.append(System.getProperty("line.separator"));
+			alquilerTA.append(AlquilerGUI.SEPARATOR);
+			alquilerTA.append(System.getProperty("line.separator"));
 		}
     }
     public void limpiaCampos() {
@@ -347,12 +352,44 @@ public class AlquilerGUI extends javax.swing.JFrame {
     	
     }                                      
 
-    private void modificaABActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
+    private void modificaABActionPerformed(java.awt.event.ActionEvent evt) {  
+    	int id;
+    	int idC;
+    	TAlquiler t = new TAlquiler(); 
+    	String pago; 
+    	try {
+    		id = Integer.parseInt(idATF.getText());
+    		
+    		if (id >= 0) {
+    			t.setId(id);
+    			if(!idCTF.getText().equals("")) {
+    				idC = Integer.parseInt(idCTF.getText());
+    				t.setIdCliente(idC);
+    			}
+    			if(!calendarioI.isEmpty())
+    				t.setFechaIni(calendarioI.getFecha());
+    			if(!calendarioF.isEmpty())
+    				t.setFechaFin(calendarioF.getFecha());
+    			
+    			if((metodoPagoBG.getSelection().getActionCommand().equals("Tarjeta")) ? true : false)
+    	     		pago = "TARJETA";
+    	     	else
+    	     		pago = "EFECTIVO";
+    			t.setPago(pago);
+    			
+    		}
+    		else
+    			JOptionPane.showMessageDialog(this, "El ID debe ser mayor que cero.", "Error modificar alquiler", JOptionPane.ERROR_MESSAGE);
+    	}
+    	catch (NumberFormatException e) {
+    		JOptionPane.showMessageDialog(this, "Introduzca un ID correcto.", "Error modificar alquiler",
+    				JOptionPane.ERROR_MESSAGE);
+    	}
     }                                          
 
     private void consultaABActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	int id; 
+  
     	try {
     		id = Integer.parseInt(idATF.getText());
     		if (id >= 0)
@@ -365,13 +402,14 @@ public class AlquilerGUI extends javax.swing.JFrame {
     	}
     }                                          
 
-    private void listaABActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
+    private void listaABActionPerformed(java.awt.event.ActionEvent evt) {  
+    	
+    	Controller.getInstance().run(ListaComandos.NEGOCIOLISTAALQUILER, null);
     }                                       
 
     private void volverBActionPerformed(java.awt.event.ActionEvent evt) {                                        
         //hay que añadir llamada al controlador venta principal
-        this.setVisible(false);        // TODO add your handling code here:
+        Controller.getInstance().run(ListaComandos.CERRAR_VISTA_ALQUILER, -1);
     }                                       
 
     /**

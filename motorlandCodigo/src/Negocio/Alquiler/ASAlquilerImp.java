@@ -12,6 +12,7 @@ import Integración.Cliente.DAOCliente;
 import Integración.DAOFactory.DaoFactory;
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
+import Integración.Vehiculo.DAOVehiculo;
 import Negocio.Cliente.TCliente;
 import Negocio.Vehiculo.TVehiculo;
 
@@ -94,15 +95,22 @@ public class ASAlquilerImp implements ASAlquiler {
 
 	@Override
 	public ArrayList<TAlquiler> listadoAlquileres() throws Exception {
-		TransactionManager.getInstance().newTransaction();
-		TransactionManager.getInstance().getTransaction().start();
-		ArrayList<TAlquiler> lista = new ArrayList<>();
+		Transaction tr = null; 
+		DAOAlquiler dao = DaoFactory.getInstance().createDAOAlquiler(); 
+		ArrayList<TAlquiler> lista;
+		try {
+			TransactionManager.getInstance().newTransaction();
+			tr = TransactionManager.getInstance().getTransaction();
+
+			tr.start();
+			
+			lista = dao.list(); 
+			
+			tr.commit();
+		}finally {
+			TransactionManager.getInstance().deleteTransaction();
+		}
 		
-		lista = DaoFactory.getInstance().createDAOAlquiler().list();
-		
-		TransactionManager.getInstance().getTransaction().commit();
-		TransactionManager.getInstance().deleteTransaction();
-		// end-user-code
 		return lista;
 	}
 
@@ -116,12 +124,10 @@ public class ASAlquilerImp implements ASAlquiler {
 			tr = TransactionManager.getInstance().getTransaction();
 			
 			tr.start();
+			
 			tAlq = dao.read(idAlquiler);
 			
-			if (tAlq == null)
-				tr.rollback();
-			else
-				tr.commit();
+			tr.commit();
 			
 		}
 		finally {
@@ -145,7 +151,7 @@ public class ASAlquilerImp implements ASAlquiler {
 			
 			tr.start();
 			
-			tCli = DaoFactory.getInstance().createDAOCliente().read(alqEnCurso.getIdCliente());
+			tCli = daoC.read(alqEnCurso.getIdCliente());
 	
 			if (tCli != null && tCli.getActivo()) {
 				l = new ArrayList<>();
@@ -157,7 +163,7 @@ public class ASAlquilerImp implements ASAlquiler {
 				tr.rollback();
 			}
 	
-			tr.commit();
+		//	tr.commit();
 		}
 		finally {
 			TransactionManager.getInstance().deleteTransaction();
@@ -180,15 +186,68 @@ public class ASAlquilerImp implements ASAlquiler {
 	}
 
 	@Override
-	public int modificarAlquiler() {
-		return 0;
+	public int modificarAlquiler(TAlquiler t) throws Exception {
+		int res = -1;
+		Transaction tr = null;
+		DAOAlquiler daoA = DaoFactory.getInstance().createDAOAlquiler();
+		DAOCliente daoC = DaoFactory.getInstance().createDAOCliente();
+		boolean coincide = false; 
+		TAlquiler tAlqAModificar = new TAlquiler();
+		try {
+			TransactionManager.getInstance().newTransaction();
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			tr.start();
+			
+			tAlqAModificar = daoA.read(t.getId());
+			if(tAlqAModificar != null) {
+				if(t.getIdCliente() > 0) {
+					
+					if(daoC.read(t.getIdCliente()) != null){
+						tAlqAModificar.setIdCliente(t.getIdCliente());
+					}
+					//Nuevo ID de cliente no existe. 
+					else {
+						res = -2;
+						tr.rollback();
+						return res; 
+					}
+				}
+				if(t.getFechaIni() != null && t.getFechaFin() != null) {
+					coincide = daoA.alquilerSolapa(t.getFechaIni(), t.getFechaFin());
+					
+					if(!coincide) {
+						tAlqAModificar.setFechaIni(t.getFechaIni());
+						tAlqAModificar.setFechaFin(t.getFechaFin());
+					}
+					//Nuevas fechas solapan con alquileres ya existentes.
+					else {
+						res = -3; 
+						tr.rollback();
+						return res; 
+					}
+				}
+				
+				tAlqAModificar.setPago(t.getPago());
+				
+				tAlqAModificar.setlistaAlquilados(t.getlistaAlquilados());
+				
+				int updateRes;
+				updateRes = daoA.update(tAlqAModificar);
+				//Error al actualizar
+				if(updateRes == 0) 
+					res = -4;		
+			}
+			//No existe el alquiler a modificar. 
+			else {
+				res = -1;
+				tr.rollback();
+			}	
+		}
+		finally {
+			TransactionManager.getInstance().deleteTransaction();
+		}
+		return res;
 	}
 	
-	private boolean solapan(Calendar fIni, Calendar fFin, Calendar fIni2, Calendar fFin2){
-		if((fIni.compareTo(fIni2) > 0 && fIni.compareTo(fFin2) < 0)
-				|| (fFin.compareTo(fIni2) > 0 && fFin.compareTo(fFin2) < 0))
-			return true;
-		else
-			return false;
-	}
 }

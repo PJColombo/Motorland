@@ -41,6 +41,14 @@ public class ListaComandos {
 	public static final int MOSTRAR_VEHICULOS_DISPONIBLES = 201;
 	
 	public static final int CERRAR_ALTA_ALQUILER_EMERGENTE = 202; 
+	
+	
+	
+	public static final int CERRAR_VISTA_ALQUILER = 203; 
+	
+	public static final int CERRAR_VISTA_CLIENTE = 204;
+	
+	public static final int CERRAR_VISTA_VEHICULO = 205;
 
 	/** 
 	 * <!-- begin-UML-doc -->

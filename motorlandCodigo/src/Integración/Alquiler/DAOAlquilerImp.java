@@ -130,7 +130,7 @@ public class DAOAlquilerImp implements DAOAlquiler {
 				ps.setInt(1, t.getId());
 				rs_lineaA = ps.executeQuery();
 				while(rs_lineaA.next())
-					t.addTolistaAlquilados(rs.getInt(2), new TLineaAlquiler(rs.getDouble(3)));
+					t.addTolistaAlquilados(rs_lineaA.getInt(2), new TLineaAlquiler(rs_lineaA.getDouble(3)));
 				
 				l.add(t);
 			}
@@ -213,14 +213,13 @@ public class DAOAlquilerImp implements DAOAlquiler {
 			tr = TransactionManager.getInstance().getTransaction();
 			cn = (Connection) tr.getResource();
 			
-			ps = cn.prepareStatement("UPDATE alquiler SET fechaIni = ?, fechaFin = ?, costeTotal = ?, pago = ?, activo = ?"
+			ps = cn.prepareStatement("UPDATE alquiler SET fechaIni = ?, fechaFin = ?, costeTotal = ?, pago = ?"
 					+ " WHERE idAlquiler = ?");
 			ps.setDate(1, (Date) DateLabelFormatter.toDate(t.getFechaFin()));
 			ps.setDate(2, (Date) DateLabelFormatter.toDate(t.getFechaFin()));
 			ps.setDouble(3, t.getCosteTotal());
 			ps.setString(4, t.getPago());
-			ps.setBoolean(5, t.getActivo());
-			ps.setInt(6, t.getId());
+			ps.setInt(5, t.getId());
 			
 			res = ps.executeUpdate();
 
@@ -357,6 +356,114 @@ public class DAOAlquilerImp implements DAOAlquiler {
 			throw new Exception("Error al conectarse a la base de datos.");
 		}
 		return cn; 
+	}
+
+	@Override
+	public boolean alquilerSolapa(Calendar fechaI, Calendar fechaF) {
+		boolean coincide = false;
+		Transaction tr = null;
+		Connection cn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Date fI;
+		Date fF;
+		String forUpdate = "";
+		try {
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			if(tr == null)
+				cn = creaConexion();
+			else {
+				forUpdate = " FOR UPDATE";
+				cn = (Connection) tr.getResource();
+			}
+			
+			fI = (Date) DateLabelFormatter.toDate(fechaI);
+			fF = (Date) DateLabelFormatter.toDate(fechaF);
+			
+			ps = cn.prepareStatement("SELECT idAlquiler FROM alquiler WHERE (fechaIni > ? AND fechaIni < ?) OR ("
+				+ "fechaFin > ? AND fechaFin < ?)" + forUpdate);
+			
+			ps.setDate(1, fI);
+			ps.setDate(2, fF);
+			ps.setDate(3, fI);
+			ps.setDate(4, fF);
+			
+			rs = ps.executeQuery(); 
+			
+			if(rs.next())
+				coincide = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} 
+			catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+			
+		}
+		
+		return coincide;
+	}
+
+	@Override
+	public ArrayList<TVehiculo> obtenVehiculosAlquilados(int id) {
+		Transaction tr = null;
+		Connection cn = null; 
+		ArrayList<TLineaAlquiler> l = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ResultSet rs_vehiculo = null; 
+		String forUpdate = "";
+		try {
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			if(tr == null)
+				cn = creaConexion();
+			else {
+				forUpdate = " FOR UPDATE";
+				cn = (Connection) tr.getResource();
+			}
+			
+			ps = cn.prepareStatement("SELECT idVehiculo, coste FROM lineaalquiler WHERE idAlquiler = ?" + forUpdate);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			TVehiculo v; 
+			while(rs.next()) {
+				v = new TVehiculo();
+				v.setId(rs.getInt(1));
+				v.setCoste(rs.getDouble(2));
+				ps = cn.prepareStatement("SELECT modelo, color, numBaterias FROM vehiculo WHERE idvehiculo = ?"); 
+				rs_vehiculo = ps.executeQuery();
+				v.setModelo(rs_vehiculo.getString(1));
+				v.setColor(rs_vehiculo.getString(2));
+				v.setNumBaterias(rs_vehiculo.getInt(3));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+			
+		}
+		return l;
 	}
 	
 }

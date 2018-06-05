@@ -26,6 +26,7 @@ public class TAlquiler {
 	private HashMap<Integer,TLineaAlquiler> listaAlquilados;
 	private boolean activo;
 
+	public TAlquiler() {}
 	
 	public TAlquiler(int id, int idCliente, Calendar fechaIni, Calendar fechaFin, double importeTotal,
 			String pago, boolean activo){
@@ -164,23 +165,33 @@ public class TAlquiler {
 		    }
 	}
 	public String toString(){
+		DateLabelFormatter dlf = new DateLabelFormatter();
 		StringBuilder sb = new StringBuilder(); 
-		sb.append("Alquiler " + this.getId() + "\n");
-		sb.append("Cliente: " + this.getIdCliente() + "\n");
-		sb.append("Fecha inicio: " + this.getFechaIni() + "\n");
-		sb.append("Fecha fin: " + this.getFechaFin() + "\n");
-		sb.append("Importe total: " + this.getCosteTotal() + "\n");
-		sb.append("Metodo de pago: " + this.getPago() + "\n");
-		sb.append("Estado: ");
-		sb.append(this.getActivo());
+		sb.append("ALQUILER " + this.getId() + "\n");
 		sb.append("\n");
-		sb.append("Lista de vehiculos alquilados: \n");
+		sb.append("CLIENTE: " + this.getIdCliente() + "\n");
+		try {
+			sb.append("FECHA INICIAL: " + dlf.valueToString(this.getFechaIni()) + "\n");
+			sb.append("FECHA FINAL: " + dlf.valueToString(this.getFechaFin()) + "\n");
+		}
+		catch (ParseException e) {
+			e.printStackTrace();
+		}
+		sb.append("IMPORTE TOTAL: " + this.getCosteTotal() + "\n");
+		sb.append("METODO DE PAGO: " + this.getPago() + "\n");
+		sb.append("ESTADO: ");
+		if (this.getActivo())
+			sb.append("ACTIVO");
+		else
+			sb.append("INACTIVO");
+		sb.append("\n");
+		sb.append("VEHÍCULOS ALQUILADOS: \n");
 		int num = 1;
 		Iterator<Entry<Integer, TLineaAlquiler>> it = this.listaAlquilados.entrySet().iterator();
 		while (it.hasNext()) 
 		{
 			Map.Entry<Integer, TLineaAlquiler> t = (Map.Entry<Integer, TLineaAlquiler>) it.next();
-			sb.append("-" + num + ": Vehiculo: " + t.getKey() + t.getValue().toString() + "\n");
+			sb.append("\t" + num + ")  " + ": Vehiculo: " + t.getKey() + "  " + t.getValue().toString() + "\n");
 			num++;
 		}
 		return sb.toString();

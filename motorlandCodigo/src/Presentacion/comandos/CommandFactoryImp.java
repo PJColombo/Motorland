@@ -22,6 +22,9 @@ import Presentacion.comandos.listadecomandos.negocio.Vehiculo.BuscarVehiculoComm
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ComprobarAutonomiaCommand;
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ListarVehiculoCommand;
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ModificarVehiculoCommand;
+import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerCommand;
+import Presentacion.comandos.listadecomandos.vistas.CerrarVistaClienteCommand;
+import Presentacion.comandos.listadecomandos.vistas.CerrarVistaVehiculoCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaAlquilerEmergenteCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuAcercaDeCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuAlquilerCommand;
@@ -60,6 +63,15 @@ public class CommandFactoryImp extends CommandFactory {
 			case ListaComandos.VISTAMENUALTAALQUILEREMERGENTE:
 				comando = new VistaAlquilerEmergenteCommand();
 			break; 
+			case ListaComandos.CERRAR_VISTA_ALQUILER:
+				comando = new CerrarVistaAlquilerCommand();
+			break;
+			case ListaComandos.CERRAR_VISTA_CLIENTE:
+				comando = new CerrarVistaClienteCommand();
+			break;
+			case ListaComandos.CERRAR_VISTA_VEHICULO:
+				comando = new CerrarVistaVehiculoCommand();
+			break;
 			//NEGOCIO CLIENTES
 			case ListaComandos.NEGOCIOALTACLIENTE:
 				comando = new AltaClienteCommand();

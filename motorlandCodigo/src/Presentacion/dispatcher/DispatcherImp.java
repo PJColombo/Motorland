@@ -58,6 +58,12 @@ public class DispatcherImp extends Dispatcher {
 			case ListaComandos.VISTAMENUALQUILER:
 			case ListaComandos.CERRAR_ALTA_ALQUILER_EMERGENTE:
 				VistaMenuAlquilerEmergente.getInstance().update(context);
+				VistaMenuAlquiler.getInstance().update(context);
+				break;
+			case ListaComandos.CERRAR_VISTA_ALQUILER:
+				VistaMenuAlquiler.getInstance().update(context);
+				VistaPrincipal.getInstance().update(context);
+				break;
 			case ListaComandos.MOSTRARLISTAALQUILER:
 			case ListaComandos.MOSTRARMODIFICARALQUILER:
 			case ListaComandos.MOSTRARBAJAALQUILER:

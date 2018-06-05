@@ -30,7 +30,7 @@ public interface ASAlquiler {
 	 */
 	public int bajaAlquiler(int idAlquiler);
 
-	public int modificarAlquiler();
+	public int modificarAlquiler(TAlquiler t) throws Exception;
 	public ArrayList<TAlquiler> listadoAlquileres() throws Exception;
 
 	public TAlquiler buscaAlquiler(int idAlquiler) throws Exception;
