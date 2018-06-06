@@ -1,7 +1,9 @@
 /**
  * 
  */
-package Integración.query;
+package Integración.queryFactory;
+
+import Integración.query.Query;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -12,7 +14,7 @@ package Integración.query;
 public class QueryFactoryImp extends QueryFactory {
 
 	@Override
-	public Query getQuery(String query) {
+	public Query newQuery(String query) {
 		// TODO Auto-generated method stub
 		return null;
 	}

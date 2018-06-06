@@ -1,7 +1,9 @@
 /**
  * 
  */
-package Integración.query;
+package Integración.queryFactory;
+
+import Integración.query.Query;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -38,5 +40,5 @@ public abstract class QueryFactory {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public abstract Query getQuery(String query);
+	public abstract Query newQuery(String query);
 }
