@@ -23,11 +23,11 @@ public class VistaMenuAlquilerEmergenteImp extends VistaMenuAlquilerEmergente{
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private AltaAlquilerEmergente vAltaAlquilerEmergente;
+	private AlquilerEmergente vAltaAlquilerEmergente;
 	//private static final String SEPARATOR = "----------------------------------";	
 
 	public VistaMenuAlquilerEmergenteImp(){
-		vAltaAlquilerEmergente = new AltaAlquilerEmergente();
+		vAltaAlquilerEmergente = new AlquilerEmergente();
 	}
 
 

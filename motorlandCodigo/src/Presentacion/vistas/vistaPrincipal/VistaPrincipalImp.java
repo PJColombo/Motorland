@@ -5,7 +5,7 @@ package Presentacion.vistas.vistaPrincipal;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
-import Presentacion.vistas.vistaAlquiler.AltaAlquilerEmergente;
+import Presentacion.vistas.vistaAlquiler.AlquilerEmergente;
 
 /** 
  * <!-- begin-UML-doc -->
