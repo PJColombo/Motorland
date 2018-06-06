@@ -6,6 +6,7 @@ package Presentacion.comandos;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.AltaAlquilerCommand;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.BajaAlquilerCommand;
+import Presentacion.comandos.listadecomandos.negocio.Alquiler.CompruebaAlquilerCommand;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.ListadoAlquileresCommand;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.ModificarAlquilerCommand;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.MostrarAlquilerCommand;
@@ -23,12 +24,14 @@ import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ComprobarAutonomia
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ListarVehiculoCommand;
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ModificarVehiculoCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerCommand;
+import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerEmergenteCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaClienteCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaVehiculoCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaAlquilerEmergenteCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuAcercaDeCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuAlquilerCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuClienteCommand;
+import Presentacion.comandos.listadecomandos.vistas.VistaMenuModificarAlquilerEmergente;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuPrincipalCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuVehiculoCommand;
 
@@ -63,6 +66,9 @@ public class CommandFactoryImp extends CommandFactory {
 			case ListaComandos.VISTAMENUALTAALQUILEREMERGENTE:
 				comando = new VistaAlquilerEmergenteCommand();
 			break; 
+			case ListaComandos.VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE:
+				comando = new VistaMenuModificarAlquilerEmergente();
+			break;
 			case ListaComandos.CERRAR_VISTA_ALQUILER:
 				comando = new CerrarVistaAlquilerCommand();
 			break;
@@ -71,6 +77,9 @@ public class CommandFactoryImp extends CommandFactory {
 			break;
 			case ListaComandos.CERRAR_VISTA_VEHICULO:
 				comando = new CerrarVistaVehiculoCommand();
+			break;
+			case ListaComandos.CERRAR_VISTA_ALQUILER_EMERGENTE:
+				comando = new CerrarVistaAlquilerEmergenteCommand();
 			break;
 			//NEGOCIO CLIENTES
 			case ListaComandos.NEGOCIOALTACLIENTE:
@@ -111,6 +120,10 @@ public class CommandFactoryImp extends CommandFactory {
 			break;
 			case ListaComandos.MOSTRAR_VEHICULOS_DISPONIBLES:
 				comando = new MostrarVehiculosDisponiblesCommand();
+			break;
+			
+			case ListaComandos.NEGOCIO_COMPRUEBA_ALQUILER:
+				comando = new CompruebaAlquilerCommand();
 			break;
 			//NEGOCIO VEHICULO
 			case ListaComandos.NEGOCIOALTAVEHICULO:

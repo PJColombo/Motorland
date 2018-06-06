@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import Negocio.Alquiler.Accion;
 import Negocio.Alquiler.TAlquiler;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.listadecomandos.ListaComandos;
@@ -40,6 +41,7 @@ public class VistaMenuAlquilerEmergenteImp extends VistaMenuAlquilerEmergente{
 				vAltaAlquilerEmergente.setTAlquiler((TAlquiler) contexto.getData()); 
 				vAltaAlquilerEmergente.configuraFechas();
 				vAltaAlquilerEmergente.setVisible(true);
+				vAltaAlquilerEmergente.setTipo(Accion.ALTA);
 				break; 
 			case ListaComandos.MOSTRAR_VEHICULOS_DISPONIBLES:
 				vAltaAlquilerEmergente.muestraVehiculosDisponibles((ArrayList<TVehiculo>) contexto.getData());
@@ -47,17 +49,24 @@ public class VistaMenuAlquilerEmergenteImp extends VistaMenuAlquilerEmergente{
 			case ListaComandos.CERRAR_ALTA_ALQUILER_EMERGENTE:
 				vAltaAlquilerEmergente.setVisible(false);
 				break;
+			case ListaComandos.PREPARA_VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE:
+				vAltaAlquilerEmergente.setTAlquiler((TAlquiler) contexto.getData());
+				vAltaAlquilerEmergente.configuraFechas();
+				vAltaAlquilerEmergente.setTipo(Accion.MODIFICACION);
+				break;
+			case ListaComandos.VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE:
+				ArrayList<ArrayList<TVehiculo>> listas = (ArrayList<ArrayList<TVehiculo>>) contexto.getData();
+				vAltaAlquilerEmergente.muestraVehiculosDisponibles(listas.get(0));
+				vAltaAlquilerEmergente.muestraVehiculosAlquilados(listas.get(1));
+				vAltaAlquilerEmergente.setVisible(true);
+				break;
+			case ListaComandos.CERRAR_VISTA_ALQUILER_EMERGENTE:
+				vAltaAlquilerEmergente.setVisible(false);
+				break;
+			case ListaComandos.MOSTRARMODIFICARALQUILER:
+				vAltaAlquilerEmergente.setVisible(false);
+			break;
 		}
-		/*
-		if(contexto.getEvent() == ListaComandos.VISTAMENUALQUILEREMERGENTE){
-			vAlquilerEmergente.setVisible(true);
-		}
-		else if(contexto.getEvent() == ListaComandos.NEGOCIOAGREGARVEHICULOCARRITO){
-		}
-		else if(contexto.getEvent() == ListaComandos.ELIMINARVEHICULOCARRITO){
-		}
-		else if(contexto.getEvent() == ListaComandos.NEGOCIOFINALIZARCARRITO){
-		}
-		*/
+	
 	}
 }

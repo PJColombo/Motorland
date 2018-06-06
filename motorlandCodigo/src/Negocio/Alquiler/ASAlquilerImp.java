@@ -15,6 +15,7 @@ import Integración.Transaction.TransactionManager;
 import Integración.Vehiculo.DAOVehiculo;
 import Negocio.Cliente.TCliente;
 import Negocio.Vehiculo.TVehiculo;
+import Presentacion.comandos.listadecomandos.negocio.Alquiler.ModificacionResultado;
 
 
 public class ASAlquilerImp implements ASAlquiler {
@@ -187,12 +188,77 @@ public class ASAlquilerImp implements ASAlquiler {
 
 	@Override
 	public int modificarAlquiler(TAlquiler t) throws Exception {
-		int res = -1;
+		int res = 0;
 		Transaction tr = null;
 		DAOAlquiler daoA = DaoFactory.getInstance().createDAOAlquiler();
+		try {
+			TransactionManager.getInstance().newTransaction();
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			tr.start();
+			
+			res = daoA.update(t);
+			
+			if(res == 0) {
+				tr.rollback();
+				res = -1; 
+			}
+			else {
+				res = 1;
+				tr.commit();
+			}
+		}
+		finally {
+			TransactionManager.getInstance().deleteTransaction();
+		}
+		return res;
+	}
+
+	@Override
+	public ArrayList<ArrayList<TVehiculo>> iniciaModificarAlquiler(TAlquiler t) {
+		Transaction tr = null; 
+		DAOAlquiler daoA = DaoFactory.getInstance().createDAOAlquiler();
+		ArrayList<ArrayList<TVehiculo>> l = null; 
+		TCliente tCli = null; 
+		
+		try {
+			TransactionManager.getInstance().newTransaction();
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			tr.start();
+			
+			l = new ArrayList<>();
+			
+			ArrayList<TVehiculo> vehiculosDisponibles = new ArrayList<>();
+			vehiculosDisponibles = daoA.obtenVehiculosNoAlquiladosNoCoincidentes(t.getId(), t.getFechaIni(), t.getFechaFin());
+			l.add(vehiculosDisponibles);
+			
+			ArrayList<TVehiculo> vehiculosAlquilados = new ArrayList<>();
+			vehiculosAlquilados = daoA.obtenVehiculosAlquilados(t.getId());
+			l.add(vehiculosAlquilados);
+			
+			
+			tr.commit();
+		//	tr.commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			TransactionManager.getInstance().deleteTransaction();
+		}
+
+		return l;
+	}
+
+	@Override
+	public ModificacionResultado compruebaAlquiler(TAlquiler t) {
+		Transaction tr = null; 
 		DAOCliente daoC = DaoFactory.getInstance().createDAOCliente();
-		boolean coincide = false; 
-		TAlquiler tAlqAModificar = new TAlquiler();
+		DAOAlquiler daoA = DaoFactory.getInstance().createDAOAlquiler();
+		TAlquiler tAlqAModificar = null; 
+		boolean coincide = false;
+		
 		try {
 			TransactionManager.getInstance().newTransaction();
 			tr = TransactionManager.getInstance().getTransaction();
@@ -200,54 +266,67 @@ public class ASAlquilerImp implements ASAlquiler {
 			tr.start();
 			
 			tAlqAModificar = daoA.read(t.getId());
-			if(tAlqAModificar != null) {
-				if(t.getIdCliente() > 0) {
-					
-					if(daoC.read(t.getIdCliente()) != null){
-						tAlqAModificar.setIdCliente(t.getIdCliente());
-					}
-					//Nuevo ID de cliente no existe. 
-					else {
-						res = -2;
-						tr.rollback();
-						return res; 
-					}
-				}
-				if(t.getFechaIni() != null && t.getFechaFin() != null) {
-					coincide = daoA.alquilerSolapa(t.getFechaIni(), t.getFechaFin());
-					
-					if(!coincide) {
-						tAlqAModificar.setFechaIni(t.getFechaIni());
-						tAlqAModificar.setFechaFin(t.getFechaFin());
-					}
-					//Nuevas fechas solapan con alquileres ya existentes.
-					else {
-						res = -3; 
-						tr.rollback();
-						return res; 
-					}
-				}
-				
-				tAlqAModificar.setPago(t.getPago());
-				
-				tAlqAModificar.setlistaAlquilados(t.getlistaAlquilados());
-				
-				int updateRes;
-				updateRes = daoA.update(tAlqAModificar);
-				//Error al actualizar
-				if(updateRes == 0) 
-					res = -4;		
-			}
-			//No existe el alquiler a modificar. 
-			else {
-				res = -1;
+			//El alquiler no existe.
+			if(tAlqAModificar == null) {
 				tr.rollback();
-			}	
+				return new ModificacionResultado(-1, null);
+			}
+			//El nuevo cliente no existe. 
+			if(t.getIdCliente() > 0) {
+				if(daoC.read(t.getIdCliente()) == null) {
+					tr.rollback();
+					return new ModificacionResultado(-2, null);
+				}
+			}
+			else
+				t.setIdCliente(tAlqAModificar.getIdCliente());
+			//Nuevos fechas solapan con otros alquileres existentes en el sistema.
+			if(t.getFechaIni() != null && t.getFechaFin() != null) {
+				coincide = daoA.alquilerSolapa(t.getFechaIni(), t.getFechaFin());
+				
+				if(coincide) {
+					tr.rollback();
+					return new ModificacionResultado(-3, null); 
+				}
+			}
+			else if(t.getFechaIni() != null) {
+				coincide = daoA.alquilerSolapa(t.getFechaIni(), tAlqAModificar.getFechaFin());
+				
+				if(coincide) {
+					tr.rollback();
+					return new ModificacionResultado(-3, null);
+				}
+				else
+					t.setFechaFin(tAlqAModificar.getFechaFin());
+				
+			}
+			else if(t.getFechaFin() != null){
+				coincide = daoA.alquilerSolapa(tAlqAModificar.getFechaIni(), t.getFechaFin());
+				
+				if(coincide) {
+					tr.rollback();
+					return new ModificacionResultado(-3, null);
+				}
+				else
+					t.setFechaIni(tAlqAModificar.getFechaIni());
+			}
+			else {
+				t.setFechaIni(tAlqAModificar.getFechaIni());
+				t.setFechaFin(tAlqAModificar.getFechaFin());
+			}
+
+			t.setCosteTotal(tAlqAModificar.getCosteTotal());
+			
+			tr.commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		finally {
 			TransactionManager.getInstance().deleteTransaction();
 		}
-		return res;
+
+		return new ModificacionResultado(1, t);
 	}
 	
 }

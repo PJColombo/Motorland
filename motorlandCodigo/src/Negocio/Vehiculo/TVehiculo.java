@@ -85,6 +85,26 @@ public class TVehiculo {
 		
 		return s; 
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+
+		if(o == null)
+			return false;
+		
+		if(o == this)
+			return true;
+		
+		if(!(o instanceof TVehiculo))
+			return false;
+		
+		TVehiculo v = (TVehiculo) o;
+		
+		if (this.id == v.getId())
+			return true;
+		else
+			return false;
+	}
     
     
 }

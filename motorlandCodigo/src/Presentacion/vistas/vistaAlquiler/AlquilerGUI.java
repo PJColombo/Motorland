@@ -36,6 +36,8 @@ public class AlquilerGUI extends javax.swing.JFrame {
     	 idATF.setText("");
          idCTF.setText(""); 
          alquilerTA.setText("");
+         calendarioI.limpiaFechaSel();
+         calendarioF.limpiaFechaSel();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -377,6 +379,9 @@ public class AlquilerGUI extends javax.swing.JFrame {
     	     		pago = "EFECTIVO";
     			t.setPago(pago);
     			
+    			Controller.getInstance().run(ListaComandos.NEGOCIO_COMPRUEBA_ALQUILER, t);
+    			if(exito_inicio_modificar)
+    				Controller.getInstance().run(ListaComandos.VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE, t);
     		}
     		else
     			JOptionPane.showMessageDialog(this, "El ID debe ser mayor que cero.", "Error modificar alquiler", JOptionPane.ERROR_MESSAGE);
@@ -412,6 +417,12 @@ public class AlquilerGUI extends javax.swing.JFrame {
         Controller.getInstance().run(ListaComandos.CERRAR_VISTA_ALQUILER, -1);
     }                                       
 
+    public boolean getExitoInicioModificar() {
+    	return exito_inicio_modificar;
+    }
+    public void setExitoInicioModificar(boolean exito) {
+    	exito_inicio_modificar = exito;
+    }
     /**
      * @param args the command line arguments
      */
@@ -475,5 +486,7 @@ public class AlquilerGUI extends javax.swing.JFrame {
     
     private Calendario calendarioI;
     private Calendario calendarioF; 
+    
+    private boolean exito_inicio_modificar; 
     // End of variables declaration                   
 }

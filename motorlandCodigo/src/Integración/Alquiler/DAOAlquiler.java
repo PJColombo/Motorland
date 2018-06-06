@@ -24,4 +24,5 @@ public interface DAOAlquiler {
 	public ArrayList<TVehiculo> obtenVehiculosNoCoincidentes (Calendar fechaI, Calendar fechaF) throws Exception;
 	public boolean alquilerSolapa(Calendar fechaI, Calendar fechaF);
 	public ArrayList<TVehiculo> obtenVehiculosAlquilados(int id); 
+	public ArrayList<TVehiculo> obtenVehiculosNoAlquiladosNoCoincidentes(int id, Calendar fechaI, Calendar fechaF);
 }

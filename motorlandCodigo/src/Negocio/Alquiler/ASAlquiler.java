@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Negocio.Vehiculo.TVehiculo;
+import Presentacion.comandos.listadecomandos.negocio.Alquiler.ModificacionResultado;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -30,6 +31,10 @@ public interface ASAlquiler {
 	 */
 	public int bajaAlquiler(int idAlquiler);
 
+	public ArrayList<ArrayList<TVehiculo>> iniciaModificarAlquiler(TAlquiler t); 
+	
+	public ModificacionResultado compruebaAlquiler(TAlquiler t); 
+	
 	public int modificarAlquiler(TAlquiler t) throws Exception;
 	public ArrayList<TAlquiler> listadoAlquileres() throws Exception;
 

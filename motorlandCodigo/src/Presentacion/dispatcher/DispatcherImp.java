@@ -5,7 +5,6 @@ package Presentacion.dispatcher;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
-import Presentacion.vistas.VistaAlquilerEmergente.AlquilerEmergente;
 import Presentacion.vistas.vistaAcercaDe.VistaAcercaDe;
 import Presentacion.vistas.vistaAlquiler.VistaMenuAlquiler;
 import Presentacion.vistas.vistaAlquiler.VistaMenuAlquilerEmergente;
@@ -59,14 +58,24 @@ public class DispatcherImp extends Dispatcher {
 			case ListaComandos.CERRAR_ALTA_ALQUILER_EMERGENTE:
 				VistaMenuAlquilerEmergente.getInstance().update(context);
 				VistaMenuAlquiler.getInstance().update(context);
-				break;
+			break;
+			case ListaComandos.CERRAR_VISTA_ALQUILER_EMERGENTE:
+				VistaMenuAlquilerEmergente.getInstance().update(context);
+				VistaMenuAlquiler.getInstance().update(context);
+			break;
 			case ListaComandos.CERRAR_VISTA_ALQUILER:
 				VistaMenuAlquiler.getInstance().update(context);
 				VistaPrincipal.getInstance().update(context);
-				break;
+			break;
+			
 			case ListaComandos.MOSTRARLISTAALQUILER:
+				
 			case ListaComandos.MOSTRARMODIFICARALQUILER:
+				VistaMenuAlquilerEmergente.getInstance().update(context);
+				VistaMenuAlquiler.getInstance().update(context);
+			break;
 			case ListaComandos.MOSTRARBAJAALQUILER:
+			
 			case ListaComandos.MOSTRARBUSCARALQUILER:
 				VistaMenuAlquiler.getInstance().update(context);
 			break;
@@ -78,6 +87,14 @@ public class DispatcherImp extends Dispatcher {
 			break;
 			
 			//VISTA ALQUILER EMERGENTE
+			case ListaComandos.VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE:
+				VistaMenuAlquiler.getInstance().update(context);
+				VistaMenuAlquilerEmergente.getInstance().update(context);
+			break;
+			case ListaComandos.PREPARA_VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE:
+				VistaMenuAlquiler.getInstance().update(context);
+				VistaMenuAlquilerEmergente.getInstance().update(context);
+			break;
 			case ListaComandos.VISTAMENUALTAALQUILEREMERGENTE:
 			case ListaComandos.MOSTRAR_VEHICULOS_DISPONIBLES:
 				VistaMenuAlquilerEmergente.getInstance().update(context);

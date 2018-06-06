@@ -23,6 +23,7 @@ import Negocio.Alquiler.TLineaAlquiler;
 import Negocio.Cliente.TCliente;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.vistas.vistaCalendario.DateLabelFormatter;
+import oracle.net.nt.NTAdapter.NetworkAdapterType;
 
 
 public class DAOAlquilerImp implements DAOAlquiler {
@@ -213,13 +214,14 @@ public class DAOAlquilerImp implements DAOAlquiler {
 			tr = TransactionManager.getInstance().getTransaction();
 			cn = (Connection) tr.getResource();
 			
-			ps = cn.prepareStatement("UPDATE alquiler SET fechaIni = ?, fechaFin = ?, costeTotal = ?, pago = ?"
+			ps = cn.prepareStatement("UPDATE alquiler SET idCliente = ?, fechaIni = ?, fechaFin = ?, costeTotal = ?, pago = ?"
 					+ " WHERE idAlquiler = ?");
-			ps.setDate(1, (Date) DateLabelFormatter.toDate(t.getFechaFin()));
-			ps.setDate(2, (Date) DateLabelFormatter.toDate(t.getFechaFin()));
-			ps.setDouble(3, t.getCosteTotal());
-			ps.setString(4, t.getPago());
-			ps.setInt(5, t.getId());
+			ps.setInt(1, t.getIdCliente());
+			ps.setDate(2, (Date) DateLabelFormatter.toDate(t.getFechaIni()));
+			ps.setDate(3, (Date) DateLabelFormatter.toDate(t.getFechaFin()));
+			ps.setDouble(4, t.getCosteTotal());
+			ps.setString(5, t.getPago());
+			ps.setInt(6, t.getId());
 			
 			res = ps.executeUpdate();
 
@@ -417,7 +419,7 @@ public class DAOAlquilerImp implements DAOAlquiler {
 	public ArrayList<TVehiculo> obtenVehiculosAlquilados(int id) {
 		Transaction tr = null;
 		Connection cn = null; 
-		ArrayList<TLineaAlquiler> l = new ArrayList<>();
+		ArrayList<TVehiculo> l = new ArrayList<>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		ResultSet rs_vehiculo = null; 
@@ -441,11 +443,15 @@ public class DAOAlquilerImp implements DAOAlquiler {
 				v = new TVehiculo();
 				v.setId(rs.getInt(1));
 				v.setCoste(rs.getDouble(2));
-				ps = cn.prepareStatement("SELECT modelo, color, numBaterias FROM vehiculo WHERE idvehiculo = ?"); 
+				ps = cn.prepareStatement("SELECT modelo, color, numBaterias FROM vehiculo WHERE idvehiculo = ?" + forUpdate); 
+				ps.setInt(1, v.getId());
 				rs_vehiculo = ps.executeQuery();
-				v.setModelo(rs_vehiculo.getString(1));
-				v.setColor(rs_vehiculo.getString(2));
-				v.setNumBaterias(rs_vehiculo.getInt(3));
+				if(rs_vehiculo.next()) {
+					v.setModelo(rs_vehiculo.getString(1));
+					v.setColor(rs_vehiculo.getString(2));
+					v.setNumBaterias(rs_vehiculo.getInt(3));
+					l.add(v);
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -463,6 +469,67 @@ public class DAOAlquilerImp implements DAOAlquiler {
 			}
 			
 		}
+		return l;
+	}
+
+	@Override
+	public ArrayList<TVehiculo> obtenVehiculosNoAlquiladosNoCoincidentes(int id, Calendar fechaI, Calendar fechaF) {
+		Transaction tr = null;
+		Connection cn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String forUpdate = "";
+		ArrayList<TVehiculo> l = new ArrayList<>();
+		try {
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			if(tr == null)
+				cn = creaConexion();
+			else {
+				forUpdate = " FOR UPDATE";
+				cn = (Connection) tr.getResource();
+			}
+			
+			Date fI = (Date) DateLabelFormatter.toDate(fechaI);
+			Date fF = (Date) DateLabelFormatter.toDate(fechaF);
+			
+			ps = cn.prepareStatement("SELECT idvehiculo, modelo, color, numBaterias, coste " + 
+					"FROM vehiculo v " + 
+					"WHERE v.activo = 1 AND v.idvehiculo NOT IN " + 
+					"(SELECT idVehiculo FROM lineaalquiler WHERE idAlquiler = ?) AND v.idvehiculo NOT IN " + 
+					"(SELECT DISTINCT idVehiculo " + 
+					"FROM lineaalquiler l WHERE l.idAlquiler IN (SELECT idAlquiler FROM alquiler WHERE (fechaIni > ? AND fechaIni < ?) OR (" + 
+					"fechaFin > ? AND fechaFin < ?)))" + forUpdate);
+			ps.setInt(1, id);
+			ps.setDate(2, fI);
+			ps.setDate(3, fF);
+			ps.setDate(4, fI);
+			ps.setDate(5, fF);
+			
+			rs = ps.executeQuery();
+			
+			tr.commit();
+			while(rs.next())
+				l.add(new TVehiculo(rs.getInt(1), rs.getString(2), null, rs.getString(3), rs.getInt(4), rs.getDouble(5), true));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return l;
 	}
 	

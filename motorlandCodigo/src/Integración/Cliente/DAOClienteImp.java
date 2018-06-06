@@ -219,8 +219,9 @@ public class DAOClienteImp implements DAOCliente {
 			rs = st.executeQuery("SELECT * FROM cliente" + forUpdate);
 			while(rs.next())
 				tList.add(new TCliente(rs.getInt(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getInt(5), rs.getBoolean(6)));
+						rs.getString(4), rs.getLong(5), rs.getBoolean(6)));
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new Exception();
 		}
 		finally 
@@ -263,7 +264,7 @@ public class DAOClienteImp implements DAOCliente {
 			
 			if(rs.next())
 				tRes = new TCliente(rs.getInt(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getInt(5), rs.getBoolean(6));
+						rs.getString(4), rs.getLong(5), rs.getBoolean(6));
 			
 		} catch (SQLException e) {
 			new Exception();

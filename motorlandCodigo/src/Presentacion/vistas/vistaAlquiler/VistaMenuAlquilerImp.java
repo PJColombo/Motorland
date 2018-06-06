@@ -80,7 +80,31 @@ public class VistaMenuAlquilerImp extends VistaMenuAlquiler {
 							
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARMODIFICARALQUILER){
-			String mensajeModificar = "";
+			switch((int) contexto.getData()) {
+			
+				case -1:
+					JOptionPane.showMessageDialog(vAlquiler, "Hubo un problema al intentar actualizar el alquiler.", "Modificar alquiler",
+							JOptionPane.ERROR_MESSAGE);
+					vAlquiler.setExitoInicioModificar(false);
+					break;
+				case -2:
+					JOptionPane.showMessageDialog(vAlquiler, "El id del cliente no existe.", "Modificar alquiler",
+							JOptionPane.ERROR_MESSAGE);
+					vAlquiler.setExitoInicioModificar(false);
+					break;
+				case -3:
+					JOptionPane.showMessageDialog(vAlquiler, "La nueva fecha del alquiler solapa con otros alquileres existentes.", "Modificar alquiler",
+							JOptionPane.ERROR_MESSAGE);
+					vAlquiler.setExitoInicioModificar(false);
+					break;
+				default:
+					JOptionPane.showMessageDialog(vAlquiler, "Alquiler actualizado con éxito.", "Modificar alquiler",
+							JOptionPane.INFORMATION_MESSAGE);
+					vAlquiler.setExitoInicioModificar(false);
+					vAlquiler.limpiaCampos();
+					vAlquiler.setVisible(true);
+					break;
+			}
 		
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARLISTAALQUILER){
@@ -93,9 +117,18 @@ public class VistaMenuAlquilerImp extends VistaMenuAlquiler {
 				JOptionPane.showMessageDialog(vAlquiler, "No hay alquileres para listar.", "Lista alquileres", JOptionPane.INFORMATION_MESSAGE);
 		
 		}
+		else if(contexto.getEvent() == ListaComandos.CERRAR_VISTA_ALQUILER_EMERGENTE) {
+			vAlquiler.limpiaCampos();
+			vAlquiler.setVisible(true);
+		}
 		else if(contexto.getEvent() == ListaComandos.CERRAR_VISTA_ALQUILER) {
 			vAlquiler.setVisible(false);
 		}
-		
+		else if(contexto.getEvent() == ListaComandos.PREPARA_VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE) {
+			vAlquiler.setExitoInicioModificar(true);
+		}
+		else if(contexto.getEvent() == ListaComandos.VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE) {
+			vAlquiler.setVisible(false);
+		}
 	}
 }

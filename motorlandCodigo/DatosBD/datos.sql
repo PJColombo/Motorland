@@ -15,34 +15,34 @@ INSERT INTO cliente (nombre, dni, domicilio, tarjeta, activo) VALUES ('Rory Gall
 
 #----------------------VEHICULOS-----------------------------------
 
-INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Capital', '9581ZGW', 'Azul', 6, 13918, true);
+INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Capital', '9581ZGW', 'Azul', 6, 6660, true);
 INSERT INTO coche (idvehiculo, puertas, gps) VALUES (LAST_INSERT_ID(), 4, true);
 
 
-INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Titan', '0542VPC', 'Rojo', 9, 15670, true);
+INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Titan', '0542VPC', 'Rojo', 9, 1567, true);
 INSERT INTO coche (idvehiculo, puertas, gps) VALUES (LAST_INSERT_ID(), 4, true);
 
 
-INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Eos', '5432AAW', 'Gris oscuro', 15, 24500, true);
+INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Eos', '5432AAW', 'Gris oscuro', 15, 2450, true);
 INSERT INTO moto (idvehiculo, baul) VALUES (last_insert_id(), true); 
 
-INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Bliss', '1237WER', 'Azul oscuro', 30,  33200, true);
+INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Bliss', '1237WER', 'Azul oscuro', 30,  3320, true);
 INSERT INTO coche (idvehiculo, puertas, gps) VALUES (LAST_INSERT_ID(), 2, true);
 
 
-INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Catalyst', '4562FTT', 'Negro', 47880, 5,  true);
+INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Catalyst', '4562FTT', 'Negro', 5, 2000,  true);
 INSERT INTO moto (idvehiculo, baul) VALUES (last_insert_id(), false); 
 
 
-INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Majesty', '5542CCC', 'Granate', 30000, 22, true);
+INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Majesty', '5542CCC', 'Granate', 22, 1350, true);
 INSERT INTO coche (idvehiculo, puertas, gps) VALUES (LAST_INSERT_ID(), 2, true);
 
 
-INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Titan', '5627TTY', 'Blanco', 13000, 10, true);
+INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Titan', '5627TTY', 'Blanco', 10, 3465, true);
 INSERT INTO moto (idvehiculo, baul) VALUES (last_insert_id(), true); 
 
 
-INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Motion', '4257GHG', 'Amarillo', 8500, 9,  true);
+INSERT INTO vehiculo (modelo, matricula, color, numBaterias, coste, activo) VALUES ('Motion', '4257GHG', 'Amarillo', 9, 8500,  true);
 INSERT INTO moto (idvehiculo, baul) VALUES (last_insert_id(), false); 
 
 
@@ -51,5 +51,11 @@ INSERT INTO moto (idvehiculo, baul) VALUES (last_insert_id(), false);
 #DELETE FROM moto WHERE idvehiculo > 0
 
 #----------------------ALQUILERES-----------------------------------
+/*
+INSERT INTO alquiler (idCliente, fechaIni, fechaFin, costeTotal, pago, activo) VALUES (57, , , '', '', , '',true); 
+INSERT INTO alquiler (idCliente, fechaIni, fechaFin, costeTotal, pago, activo) VALUES (58, , '', '', , '',true);
+INSERT INTO alquiler (idCliente, fechaIni, fechaFin, costeTotal, pago, activo) VALUES (, , '', '', , '',true);
+INSERT INTO alquiler (idCliente, fechaIni, fechaFin, costeTotal, pago, activo) VALUES ( , , '', '', , '',true);*/
 
-
+#DELETE FROM alquiler where idAlquiler > 0
+#DELETE FROM lineaalquiler where idAlquiler > 0

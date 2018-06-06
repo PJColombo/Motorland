@@ -26,7 +26,9 @@ public class TAlquiler {
 	private HashMap<Integer,TLineaAlquiler> listaAlquilados;
 	private boolean activo;
 
-	public TAlquiler() {}
+	public TAlquiler() {
+		listaAlquilados = new HashMap<>();
+	}
 	
 	public TAlquiler(int id, int idCliente, Calendar fechaIni, Calendar fechaFin, double importeTotal,
 			String pago, boolean activo){
