@@ -30,7 +30,9 @@ public class DispatcherImp extends Dispatcher {
 			case ListaComandos.VISTAMENUPRINCIPAL:
 				VistaPrincipal.getInstance().update(context);
 			break;
-			
+			case ListaComandos.CERRAR_VISTA_PRINCIPAL:
+				VistaPrincipal.getInstance().update(context);
+			break;
 			//VISTA CLIENTES
 			case ListaComandos.VISTAMENUCLIENTE:
 			case ListaComandos.MOSTRARALTACLIENTE:
@@ -79,7 +81,10 @@ public class DispatcherImp extends Dispatcher {
 			case ListaComandos.MOSTRARBUSCARALQUILER:
 				VistaMenuAlquiler.getInstance().update(context);
 			break;
-		
+			case ListaComandos.ERROR_ALTA_ALQUILER:
+				VistaMenuAlquilerEmergente.getInstance().update(context);
+				VistaMenuAlquiler.getInstance().update(context);
+				break;
 		
 			//VISTA ACERCADE
 			case ListaComandos.VISTAACERCADE:
@@ -95,8 +100,10 @@ public class DispatcherImp extends Dispatcher {
 				VistaMenuAlquiler.getInstance().update(context);
 				VistaMenuAlquilerEmergente.getInstance().update(context);
 			break;
-			case ListaComandos.VISTAMENUALTAALQUILEREMERGENTE:
-			case ListaComandos.MOSTRAR_VEHICULOS_DISPONIBLES:
+			case ListaComandos.PREPARA_VISTA_MENU_ALTA_ALQUILER_EMERGENTE:
+				VistaMenuAlquilerEmergente.getInstance().update(context);
+			break;
+			case ListaComandos.VISTA_MENU_ALTA_ALQUILER_EMERGENTE:
 				VistaMenuAlquilerEmergente.getInstance().update(context);
 			break;
 		}

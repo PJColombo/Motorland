@@ -45,7 +45,7 @@ public class AcercaDe extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("\t    \n\t           MOTORLAND\n\t            VERSION 1.0.0\n\t\n                     DESARROLLADO POR: MOTORLAND\n\t  INGENIERIA DEL SOFTWARE\n\t");
+        jTextArea1.setText("\t    \n\t           MOTORLAND\n\t            VERSION 3.4.5\n\t\n               PAULO J. COLOMBO Y EDUARDO GONZALO\n\t  MODELADO DEL SOFTWARE\n\t");
         jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jScrollPane1.setViewportView(jTextArea1);
 

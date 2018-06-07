@@ -6,10 +6,13 @@ package Negocio.Vehiculo;
 
 import java.util.ArrayList;
 
+import Integración.Alquiler.DAOAlquiler;
 import Integración.DAOFactory.DaoFactory;
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
 import Integración.Vehiculo.DAOVehiculo;
+import Integración.query.Query;
+import Integración.queryFactory.QueryFactory;
 
 public class ASVehiculoImp implements ASVehiculo {
 
@@ -214,6 +217,32 @@ public class ASVehiculoImp implements ASVehiculo {
 		}
 		
 		return res;
+	}
+
+	@Override
+	public TVehiculo vehiculoMasAlquilado() {
+		Transaction tr = null;
+		TVehiculo vVIP = null;
+		
+		try {
+			TransactionManager.getInstance().newTransaction();
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			tr.start();
+			
+			Query q = QueryFactory.getInstance().newQuery("");
+			
+			vVIP = (TVehiculo) q.execute(null);
+			
+			tr.commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			TransactionManager.getInstance().deleteTransaction();
+		}
+		return vVIP;
 	}
 	
 }

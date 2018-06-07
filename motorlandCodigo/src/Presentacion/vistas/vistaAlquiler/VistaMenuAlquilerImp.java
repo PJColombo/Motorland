@@ -50,6 +50,10 @@ public class VistaMenuAlquilerImp extends VistaMenuAlquiler {
 			}
 			vAlquiler.limpiaCampos();
 		}
+		else if(contexto.getEvent() == ListaComandos.ERROR_ALTA_ALQUILER) {
+			JOptionPane.showMessageDialog(vAlquiler, "El ID del cliente no existe.",
+					"Alta alquiler", JOptionPane.ERROR_MESSAGE);
+		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARBAJAALQUILER){
 			String titulo = "Error baja alquiler";
 			switch((int) contexto.getData()) {

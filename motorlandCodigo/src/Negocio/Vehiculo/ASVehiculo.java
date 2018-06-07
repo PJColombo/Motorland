@@ -25,4 +25,6 @@ public interface ASVehiculo {
 
 	public int comprobarAutonomia(int t) throws Exception;
 	
+	public TVehiculo vehiculoMasAlquilado(); 
+	
 }

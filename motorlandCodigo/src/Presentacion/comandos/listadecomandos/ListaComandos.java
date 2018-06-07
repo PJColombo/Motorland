@@ -35,9 +35,9 @@ public class ListaComandos {
 	 */
 	public static final int VISTAMENUALQUILER = 53;
 		
-	public static final int VISTAMENUALTAALQUILEREMERGENTE = 200;
+	public static final int PREPARA_VISTA_MENU_ALTA_ALQUILER_EMERGENTE = 200;
 	
-	public static final int MOSTRAR_VEHICULOS_DISPONIBLES = 201;
+	public static final int VISTA_MENU_ALTA_ALQUILER_EMERGENTE = 201;
 	
 	public static final int CERRAR_ALTA_ALQUILER_EMERGENTE = 202; 
 	
@@ -53,7 +53,7 @@ public class ListaComandos {
 	
 	public static final int VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE = 207;
 	
-	public static final int NEGOCIO_COMPRUEBA_ALQUILER = 208;
+	public static final int NEGOCIO_INICIA_MODIFICAR_ALQUILER = 208;
 	
 	public static final int CERRAR_VISTA_ALQUILER_EMERGENTE = 209; 
 
@@ -201,7 +201,7 @@ public class ListaComandos {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public  static final int MOSTRARALTAALQUILER = 77;
+	public  static final int ERROR_ALTA_ALQUILER = 77;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -265,5 +265,7 @@ public class ListaComandos {
 	 */
 	
 	public  static final int VISTAACERCADE = 100;
+	
+	public static final int CERRAR_VISTA_PRINCIPAL = 210; 
 	
 }

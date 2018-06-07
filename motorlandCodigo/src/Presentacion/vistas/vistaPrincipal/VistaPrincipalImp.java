@@ -3,9 +3,11 @@
  */
 package Presentacion.vistas.vistaPrincipal;
 
+import javax.swing.JOptionPane;
+
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
-import Presentacion.vistas.vistaAlquiler.AlquilerEmergente;
+import Presentacion.vistas.vistaAlquiler.AlquilerEmergenteGUI;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -19,13 +21,13 @@ public class VistaPrincipalImp extends VistaPrincipal {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Principal vPrincipal;
+	private PrincipalGUI vPrincipal;
 	
 	public VistaPrincipalImp() 
 	{
 		java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	vPrincipal = new Principal();
+            	vPrincipal = new PrincipalGUI();
             }
         });
 	}
@@ -43,6 +45,11 @@ public class VistaPrincipalImp extends VistaPrincipal {
 	            	vPrincipal.setVisible(true);
 	            }
 	        });
+		}
+		else if(contexto.getEvent() == ListaComandos.CERRAR_VISTA_PRINCIPAL) {
+			vPrincipal.setVisible(false);
+			JOptionPane.showMessageDialog(vPrincipal, "Hasta luego! ", "Salir", JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
 		}
 	}
 }

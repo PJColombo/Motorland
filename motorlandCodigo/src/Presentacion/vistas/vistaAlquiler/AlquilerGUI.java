@@ -325,8 +325,8 @@ public class AlquilerGUI extends javax.swing.JFrame {
 		     		if(id_c >= 0) {
 			     		TAlquiler t = new TAlquiler(-1, id_c, fechaI, fechaF, -1, pago, true);
 			     		
-			     		Controller.getInstance().run(ListaComandos.VISTAMENUALTAALQUILEREMERGENTE, t);
-			     		Controller.getInstance().run(ListaComandos.MOSTRAR_VEHICULOS_DISPONIBLES, t);
+			     		Controller.getInstance().run(ListaComandos.PREPARA_VISTA_MENU_ALTA_ALQUILER_EMERGENTE, t);
+			     		Controller.getInstance().run(ListaComandos.VISTA_MENU_ALTA_ALQUILER_EMERGENTE, t);
 		     		}
 		     		else
 		     			JOptionPane.showMessageDialog(this, "El ID debe ser mayor que cero.", "Error alta alquiler", JOptionPane.ERROR_MESSAGE);
@@ -379,7 +379,7 @@ public class AlquilerGUI extends javax.swing.JFrame {
     	     		pago = "EFECTIVO";
     			t.setPago(pago);
     			
-    			Controller.getInstance().run(ListaComandos.NEGOCIO_COMPRUEBA_ALQUILER, t);
+    			Controller.getInstance().run(ListaComandos.NEGOCIO_INICIA_MODIFICAR_ALQUILER, t);
     			if(exito_inicio_modificar)
     				Controller.getInstance().run(ListaComandos.VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE, t);
     		}

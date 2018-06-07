@@ -164,7 +164,6 @@ public class ASAlquilerImp implements ASAlquiler {
 				tr.rollback();
 			}
 	
-		//	tr.commit();
 		}
 		finally {
 			TransactionManager.getInstance().deleteTransaction();
@@ -219,7 +218,6 @@ public class ASAlquilerImp implements ASAlquiler {
 		Transaction tr = null; 
 		DAOAlquiler daoA = DaoFactory.getInstance().createDAOAlquiler();
 		ArrayList<ArrayList<TVehiculo>> l = null; 
-		TCliente tCli = null; 
 		
 		try {
 			TransactionManager.getInstance().newTransaction();
@@ -239,7 +237,6 @@ public class ASAlquilerImp implements ASAlquiler {
 			
 			
 			tr.commit();
-		//	tr.commit();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -282,7 +279,7 @@ public class ASAlquilerImp implements ASAlquiler {
 				t.setIdCliente(tAlqAModificar.getIdCliente());
 			//Nuevos fechas solapan con otros alquileres existentes en el sistema.
 			if(t.getFechaIni() != null && t.getFechaFin() != null) {
-				coincide = daoA.alquilerSolapa(t.getFechaIni(), t.getFechaFin());
+				coincide = daoA.alquilerSolapa(t.getId(), t.getFechaIni(), t.getFechaFin());
 				
 				if(coincide) {
 					tr.rollback();
@@ -290,7 +287,7 @@ public class ASAlquilerImp implements ASAlquiler {
 				}
 			}
 			else if(t.getFechaIni() != null) {
-				coincide = daoA.alquilerSolapa(t.getFechaIni(), tAlqAModificar.getFechaFin());
+				coincide = daoA.alquilerSolapa(t.getId(), t.getFechaIni(), tAlqAModificar.getFechaFin());
 				
 				if(coincide) {
 					tr.rollback();
@@ -301,7 +298,7 @@ public class ASAlquilerImp implements ASAlquiler {
 				
 			}
 			else if(t.getFechaFin() != null){
-				coincide = daoA.alquilerSolapa(tAlqAModificar.getFechaIni(), t.getFechaFin());
+				coincide = daoA.alquilerSolapa(t.getId(), tAlqAModificar.getFechaIni(), t.getFechaFin());
 				
 				if(coincide) {
 					tr.rollback();

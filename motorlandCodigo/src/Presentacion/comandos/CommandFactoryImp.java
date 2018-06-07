@@ -6,11 +6,10 @@ package Presentacion.comandos;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.AltaAlquilerCommand;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.BajaAlquilerCommand;
-import Presentacion.comandos.listadecomandos.negocio.Alquiler.CompruebaAlquilerCommand;
+import Presentacion.comandos.listadecomandos.negocio.Alquiler.IniciaModificarAlquilerCommand;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.ListadoAlquileresCommand;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.ModificarAlquilerCommand;
-import Presentacion.comandos.listadecomandos.negocio.Alquiler.MostrarAlquilerCommand;
-import Presentacion.comandos.listadecomandos.negocio.Alquiler.MostrarVehiculosDisponiblesCommand;
+import Presentacion.comandos.listadecomandos.negocio.Alquiler.BuscarAlquilerCommand;
 import Presentacion.comandos.listadecomandos.negocio.Cliente.AltaClienteCommand;
 import Presentacion.comandos.listadecomandos.negocio.Cliente.BajaClienteCommand;
 import Presentacion.comandos.listadecomandos.negocio.Cliente.BuscarClienteCommand;
@@ -26,10 +25,12 @@ import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ModificarVehiculoC
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerEmergenteCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaClienteCommand;
+import Presentacion.comandos.listadecomandos.vistas.CerrarVistaPrincipalCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaVehiculoCommand;
-import Presentacion.comandos.listadecomandos.vistas.VistaAlquilerEmergenteCommand;
+import Presentacion.comandos.listadecomandos.vistas.PreparaVistaMenuAltaAlquilerEmergenteCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuAcercaDeCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuAlquilerCommand;
+import Presentacion.comandos.listadecomandos.vistas.VistaMenuAltaAlquilerEmergenteCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuClienteCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuModificarAlquilerEmergente;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuPrincipalCommand;
@@ -51,6 +52,9 @@ public class CommandFactoryImp extends CommandFactory {
 			case ListaComandos.VISTAMENUPRINCIPAL:
 				comando = new VistaMenuPrincipalCommand();
 			break;
+			case ListaComandos.CERRAR_VISTA_PRINCIPAL:
+				comando = new CerrarVistaPrincipalCommand();
+			break;
 			case ListaComandos.VISTAACERCADE:
 				comando = new VistaMenuAcercaDeCommand();
 			break;
@@ -63,9 +67,12 @@ public class CommandFactoryImp extends CommandFactory {
 			case ListaComandos.VISTAMENUALQUILER:
 				comando = new VistaMenuAlquilerCommand();
 			break;
-			case ListaComandos.VISTAMENUALTAALQUILEREMERGENTE:
-				comando = new VistaAlquilerEmergenteCommand();
+			case ListaComandos.PREPARA_VISTA_MENU_ALTA_ALQUILER_EMERGENTE:
+				comando = new PreparaVistaMenuAltaAlquilerEmergenteCommand();
 			break; 
+			case ListaComandos.VISTA_MENU_ALTA_ALQUILER_EMERGENTE:
+				comando = new VistaMenuAltaAlquilerEmergenteCommand();
+			break;
 			case ListaComandos.VISTA_MENU_MODIFICAR_ALQUILER_EMERGENTE:
 				comando = new VistaMenuModificarAlquilerEmergente();
 			break;
@@ -116,14 +123,10 @@ public class CommandFactoryImp extends CommandFactory {
 				comando = new ListadoAlquileresCommand();
 			break;
 			case ListaComandos.NEGOCIOBUSCARALQUILER:
-				comando = new MostrarAlquilerCommand();
+				comando = new BuscarAlquilerCommand();
 			break;
-			case ListaComandos.MOSTRAR_VEHICULOS_DISPONIBLES:
-				comando = new MostrarVehiculosDisponiblesCommand();
-			break;
-			
-			case ListaComandos.NEGOCIO_COMPRUEBA_ALQUILER:
-				comando = new CompruebaAlquilerCommand();
+			case ListaComandos.NEGOCIO_INICIA_MODIFICAR_ALQUILER:
+				comando = new IniciaModificarAlquilerCommand();
 			break;
 			//NEGOCIO VEHICULO
 			case ListaComandos.NEGOCIOALTAVEHICULO:

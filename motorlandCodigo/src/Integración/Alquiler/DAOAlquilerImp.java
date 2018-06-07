@@ -312,13 +312,15 @@ public class DAOAlquilerImp implements DAOAlquiler {
 					+ "FROM vehiculo v "
 					+ "WHERE v.activo = 1 AND v.idvehiculo NOT IN "
 					+ "(SELECT DISTINCT idVehiculo "
-					+ "FROM lineaalquiler l WHERE l.idAlquiler IN (SELECT idAlquiler FROM alquiler WHERE (fechaIni > ? AND fechaIni < ?) OR ("
-					+ "fechaFin > ? AND fechaFin < ?)))" + forUpdate);
+					+ "FROM lineaalquiler l WHERE l.idAlquiler IN (SELECT idAlquiler FROM alquiler WHERE (fechaIni >= ? AND fechaIni <= ?) OR ("
+					+ "fechaFin >= ? AND fechaFin <= ?) OR (fechaIni <= ? AND fechaFin >= ?)))" + forUpdate);
 			
 			ps.setDate(1, fI);
 			ps.setDate(2, fF);
 			ps.setDate(3, fI);
 			ps.setDate(4, fF);
+			ps.setDate(5, fI);
+			ps.setDate(6, fF);
 			
 			rs = ps.executeQuery(); 
 			
@@ -361,7 +363,7 @@ public class DAOAlquilerImp implements DAOAlquiler {
 	}
 
 	@Override
-	public boolean alquilerSolapa(Calendar fechaI, Calendar fechaF) {
+	public boolean alquilerSolapa(int idAlquiler, Calendar fechaI, Calendar fechaF) {
 		boolean coincide = false;
 		Transaction tr = null;
 		Connection cn = null;
@@ -383,13 +385,20 @@ public class DAOAlquilerImp implements DAOAlquiler {
 			fI = (Date) DateLabelFormatter.toDate(fechaI);
 			fF = (Date) DateLabelFormatter.toDate(fechaF);
 			
-			ps = cn.prepareStatement("SELECT idAlquiler FROM alquiler WHERE (fechaIni > ? AND fechaIni < ?) OR ("
-				+ "fechaFin > ? AND fechaFin < ?)" + forUpdate);
+			ps = cn.prepareStatement("SELECT idvehiculo "
+					+ "FROM lineaalquiler v "
+					+ "WHERE v.idAlquiler = ? AND v.idvehiculo IN "
+					+ "(SELECT DISTINCT idVehiculo "
+					+ "FROM lineaalquiler l WHERE l.idAlquiler IN (SELECT idAlquiler FROM alquiler WHERE (fechaIni >= ? AND fechaIni <= ?) OR ("
+					+ "fechaFin >= ? AND fechaFin <= ?) OR (fechaIni <= ? AND fechaFin >= ?)))" + forUpdate);
 			
-			ps.setDate(1, fI);
-			ps.setDate(2, fF);
-			ps.setDate(3, fI);
-			ps.setDate(4, fF);
+			ps.setInt(1, idAlquiler);
+			ps.setDate(2, fI);
+			ps.setDate(3, fF);
+			ps.setDate(4, fI);
+			ps.setDate(5, fF);
+			ps.setDate(6, fI);
+			ps.setDate(7, fF);
 			
 			rs = ps.executeQuery(); 
 			
@@ -498,14 +507,15 @@ public class DAOAlquilerImp implements DAOAlquiler {
 					"WHERE v.activo = 1 AND v.idvehiculo NOT IN " + 
 					"(SELECT idVehiculo FROM lineaalquiler WHERE idAlquiler = ?) AND v.idvehiculo NOT IN " + 
 					"(SELECT DISTINCT idVehiculo " + 
-					"FROM lineaalquiler l WHERE l.idAlquiler IN (SELECT idAlquiler FROM alquiler WHERE (fechaIni > ? AND fechaIni < ?) OR (" + 
-					"fechaFin > ? AND fechaFin < ?)))" + forUpdate);
+					"FROM lineaalquiler l WHERE l.idAlquiler IN (SELECT idAlquiler FROM alquiler WHERE (fechaIni >= ? AND fechaIni <= ?) OR (" + 
+					"fechaFin >= ? AND fechaFin <= ?) OR (fechaIni <= ? AND fechaFin >= ?)))" + forUpdate);
 			ps.setInt(1, id);
 			ps.setDate(2, fI);
 			ps.setDate(3, fF);
 			ps.setDate(4, fI);
 			ps.setDate(5, fF);
-			
+			ps.setDate(6, fI);
+			ps.setDate(7, fF);
 			rs = ps.executeQuery();
 			
 			tr.commit();
