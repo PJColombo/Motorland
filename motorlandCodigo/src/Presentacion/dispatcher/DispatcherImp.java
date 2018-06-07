@@ -7,7 +7,7 @@ import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
 import Presentacion.vistas.vistaAcercaDe.VistaAcercaDe;
 import Presentacion.vistas.vistaAlquiler.VistaMenuAlquiler;
-import Presentacion.vistas.vistaAlquiler.VistaMenuAlquilerEmergente;
+import Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente.VistaMenuAlquilerEmergente;
 import Presentacion.vistas.vistaCliente.VistaMenuClientes;
 import Presentacion.vistas.vistaPrincipal.VistaPrincipal;
 import Presentacion.vistas.vistaVehiculo.VistaMenuVehiculo;
@@ -44,6 +44,12 @@ public class DispatcherImp extends Dispatcher {
 				VistaMenuClientes.getInstance().update(context);
 			break;
 			
+			case ListaComandos.MOSTRAR_ELIMINA_CLIENTE:
+				VistaMenuClientes.getInstance().update(context);
+			case ListaComandos.CERRAR_VISTA_CLIENTE:
+				VistaMenuClientes.getInstance().update(context);
+				VistaPrincipal.getInstance().update(context);
+			break;
 			//VISTA VEHICULO
 			case ListaComandos.VISTAMENUVEHICULO:
 			case ListaComandos.MOSTRARALTAVEHICULO:
@@ -77,6 +83,9 @@ public class DispatcherImp extends Dispatcher {
 				VistaMenuAlquiler.getInstance().update(context);
 			break;
 			case ListaComandos.MOSTRARBAJAALQUILER:
+				VistaMenuAlquilerEmergente.getInstance().update(context);
+				VistaMenuAlquiler.getInstance().update(context);
+			break;
 			
 			case ListaComandos.MOSTRARBUSCARALQUILER:
 				VistaMenuAlquiler.getInstance().update(context);

@@ -1,4 +1,4 @@
-package Presentacion.vistas.vistaAlquiler;
+package Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import Negocio.Alquiler.Accion;
-import Negocio.Alquiler.CalculadorPrecios;
-import Negocio.Alquiler.Operacion;
 import Negocio.Alquiler.TAlquiler;
 import Negocio.Alquiler.TLineaAlquiler;
+import Negocio.Alquiler.enumeradosAlq.Accion;
+import Negocio.Alquiler.enumeradosAlq.Operacion;
+import Negocio.Alquiler.miscelanea.CalculadorPrecios;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Controller;

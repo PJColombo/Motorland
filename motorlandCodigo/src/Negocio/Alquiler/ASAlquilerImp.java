@@ -13,6 +13,7 @@ import Integración.DAOFactory.DaoFactory;
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
 import Integración.Vehiculo.DAOVehiculo;
+import Negocio.Alquiler.enumeradosAlq.Operacion;
 import Negocio.Cliente.TCliente;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.ModificacionResultado;

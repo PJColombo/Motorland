@@ -2,6 +2,7 @@ package Presentacion.vistas.vistaAcercaDe;
 
 
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Controller;
@@ -14,11 +15,18 @@ public class AcercaDe extends javax.swing.JFrame {
      * Creates new form AcercaDe
      */
     public AcercaDe() {
-        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/MotorLand.png")).getImage());
-        initComponents();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setTitle("Acerca De");
+    	SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				AcercaDe.this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/MotorLand.png")).getImage());
+		        initComponents();
+		        setLocationRelativeTo(null);
+		        setResizable(false);
+		        setTitle("Acerca De");
+			}
+		});
+        
     }
 
     /**

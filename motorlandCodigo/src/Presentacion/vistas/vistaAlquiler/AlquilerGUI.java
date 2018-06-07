@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import Negocio.Alquiler.TAlquiler;
 import Presentacion.comandos.listadecomandos.ListaComandos;
@@ -19,9 +20,16 @@ public class AlquilerGUI extends javax.swing.JFrame {
      * Creates new form Alquiler
      */
     public AlquilerGUI() {
-    	setIconImage(new ImageIcon(getClass().getResource("/Imagenes/MotorLand.png")).getImage());
-    	setTitle("Menú Alquiler");
-        initComponents();
+    	SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				setIconImage(new ImageIcon(getClass().getResource("/Imagenes/MotorLand.png")).getImage());
+		    	setTitle("Menú Alquiler");
+		        initComponents();
+			}
+		});
+    	
     }
     
     public void muestraAlquileres(TAlquiler... alquileres) {

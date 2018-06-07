@@ -17,9 +17,9 @@ import java.util.Map;
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
 import Integración.connectionPool.ConnectionPoolFactory;
-import Negocio.Alquiler.Operacion;
 import Negocio.Alquiler.TAlquiler;
 import Negocio.Alquiler.TLineaAlquiler;
+import Negocio.Alquiler.enumeradosAlq.Operacion;
 import Negocio.Cliente.TCliente;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.vistas.vistaCalendario.DateLabelFormatter;
@@ -77,14 +77,27 @@ public class DAOAlquilerImp implements DAOAlquiler {
 	 */
 	@Override
 	public int delete(int id) {
-		return 0; 
-		/*Transaction tr = null; 
+		int res; 
+		Transaction tr = null; 
 		Connection cn = null; 
 		PreparedStatement ps = null; 
 		try {
 			tr = TransactionManager.getInstance().getTransaction();
 			cn = (Connection) tr.getResource();
-			ps = cn.prepareStatement("")
+			ps = cn.prepareStatement("DELETE FROM alquiler WHERE idAlquiler = ?");
+			ps.setInt(1, id);
+			res = ps.executeUpdate(); 
+			
+			if(res == 0)
+				tr.rollback();
+			else
+				tr.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		finally {
 			if (ps != null)
@@ -96,8 +109,6 @@ public class DAOAlquilerImp implements DAOAlquiler {
 				}
 		}
 		return 0;
-		// end-user-code
-		*/
 	}
 
 	@Override

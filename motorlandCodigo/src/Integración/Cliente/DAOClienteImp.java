@@ -102,7 +102,7 @@ public class DAOClienteImp implements DAOCliente {
 				if (ps != null)
 					ps.close();
 			}
-			catch (SQLException e) {}
+			catch (SQLException e) {e.printStackTrace();}
 		}
 		// 0 nose ha modificado ninguna fila
 		//otro numero bien 

@@ -94,6 +94,8 @@ public class ListaComandos {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public  static final int NEGOCIOCLIENTEVIP = 59;
+	
+	public static final int NEGOCIO_ELIMINA_CLIENTE = 211; 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -190,6 +192,8 @@ public class ListaComandos {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public  static final int MOSTRARCONSULTARCLIENTE = 75;
+	
+	public static final int MOSTRAR_ELIMINA_CLIENTE = 212; 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -268,4 +272,5 @@ public class ListaComandos {
 	
 	public static final int CERRAR_VISTA_PRINCIPAL = 210; 
 	
+	// COMANDO 212
 }

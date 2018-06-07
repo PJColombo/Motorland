@@ -11,6 +11,7 @@ import Integración.Cliente.DAOCliente;
 import Integración.DAOFactory.DaoFactory;
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
+import Integración.queryFactory.QueryFactory;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -35,11 +36,11 @@ public class ASClienteImp implements ASCliente {
 	        TCliente tc = dao.readByDNI(t.getDni());
 	
 	        if (tc == null){
-	        	//anadimos el lciente a la bbdd                       
+	        	//anadimos el cliente a la bd                       
 	            id = dao.create(t);
 	            
 	            if (id == 0){ 
-	                id = -1;// error al añadir cliente no dado de alta en labase de datos;
+	                id = -1;// error al añadir cliente no dado de alta en la base de datos;
 	                tr.rollback();
 	            }        
 	            else{ 
@@ -114,7 +115,7 @@ public class ASClienteImp implements ASCliente {
 	public int modificarCliente(TCliente t) throws Exception {
 		int id = 0;
 		Transaction tr = null; 
-		DAOCliente dao = null; 
+		DAOCliente dao = DaoFactory.getInstance().createDAOCliente(); 
 		try {
 			TransactionManager.getInstance().newTransaction();
 			tr = TransactionManager.getInstance().getTransaction();
@@ -199,8 +200,61 @@ public class ASClienteImp implements ASCliente {
 
 	@Override
 	public TCliente clienteVip() {
-		// TODO Auto-generated method stub
-		return null;
+		Transaction tr;
+		TCliente vip = null;
+		
+		try {
+			TransactionManager.getInstance().newTransaction();
+			
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			tr.start();
+			
+			vip = (TCliente) QueryFactory.getInstance().newQuery("");
+			
+			tr.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			TransactionManager.getInstance().deleteTransaction();
+		}
+		return vip;
+	}
+
+	@Override
+	public int eliminaCliente(int id) {
+		Transaction tr = null; 
+		DAOCliente dao = DaoFactory.getInstance().createDAOCliente();
+		int res = 0; 
+		try {
+			TransactionManager.getInstance().newTransaction();
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			tr.start();
+			
+			if(dao.read(id) != null) {
+				res = dao.delete(id);
+				//Error al intentar eliminar el cliente. 
+				if(res == 0) {
+					res = -2;
+					tr.rollback();
+				}
+				else
+					tr.commit();
+			}
+			//El cliente no existe. 
+			else {
+				res = -1;
+				tr.rollback();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			TransactionManager.getInstance().deleteTransaction();
+		}
+		return res;
 	}
 
 	

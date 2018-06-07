@@ -1,4 +1,4 @@
-package Negocio.Alquiler;
+package Negocio.Alquiler.miscelanea;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

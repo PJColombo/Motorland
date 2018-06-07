@@ -1,5 +1,6 @@
 package Negocio.Alquiler;
 
+import Negocio.Alquiler.enumeradosAlq.Operacion;
 
 public class TLineaAlquiler {
 	

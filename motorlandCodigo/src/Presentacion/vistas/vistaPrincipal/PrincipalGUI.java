@@ -3,8 +3,7 @@ package Presentacion.vistas.vistaPrincipal;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
-
+import javax.swing.SwingUtilities;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Controller;
@@ -19,8 +18,16 @@ public class PrincipalGUI extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public PrincipalGUI() {
-    	this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/MotorLand.png")).getImage());
-        initComponents();
+    	SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				PrincipalGUI.this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/MotorLand.png")).getImage());
+		        initComponents();
+				
+			}
+		});
+    	
     }
 
     /**

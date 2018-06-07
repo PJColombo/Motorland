@@ -75,15 +75,14 @@ public class TCliente {
 	}
 	
 	public String toString(){
-		StringBuilder sb = new StringBuilder(); 
-		sb.append("Cliente " + this.getId() + " ");
-		sb.append("Nombre: " + this.getNombre() + " ");
-		sb.append("DNI: " + this.getDni() + " ");
-		sb.append("Domicilio: " + this.getDomicilio() + " ");
-		sb.append("Tarjeta: " + this.getTarjeta() + " ");
-		sb.append("Estado: ");
-		sb.append(this.getActivo());
-		sb.append("\n");
-		return sb.toString();
+		String s = "ID CLIENTE: " + idCliente + "\n"
+				+ "NOMBRE: " + nombre + "\n"
+				+ "DNI: " + dni + "\n"
+				+ "DIRECCION: " + domicilio + "\n"
+				+ "TARJETA: " + tarjeta + "\n"
+				+ "ACTIVO: ";
+		s += activo ? "ACTIVO" : "INACTIVO";
+		s += "\n";
+		return s.toString();
 	}
 }

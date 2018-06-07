@@ -1,4 +1,4 @@
-package Presentacion.vistas.vistaAlquiler;
+package Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente;
 
 
 
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import Negocio.Alquiler.Accion;
 import Negocio.Alquiler.TAlquiler;
+import Negocio.Alquiler.enumeradosAlq.Accion;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;

@@ -14,6 +14,7 @@ import Presentacion.comandos.listadecomandos.negocio.Cliente.AltaClienteCommand;
 import Presentacion.comandos.listadecomandos.negocio.Cliente.BajaClienteCommand;
 import Presentacion.comandos.listadecomandos.negocio.Cliente.BuscarClienteCommand;
 import Presentacion.comandos.listadecomandos.negocio.Cliente.ClienteVipCommand;
+import Presentacion.comandos.listadecomandos.negocio.Cliente.EliminaClienteCommand;
 import Presentacion.comandos.listadecomandos.negocio.Cliente.ListarClientesCommand;
 import Presentacion.comandos.listadecomandos.negocio.Cliente.ModificarClienteCommand;
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.AltaVehiculoCommand;
@@ -109,6 +110,9 @@ public class CommandFactoryImp extends CommandFactory {
 				comando = new ModificarClienteCommand();
 			break;
 			
+			case ListaComandos.NEGOCIO_ELIMINA_CLIENTE:
+				comando = new EliminaClienteCommand();
+			break;
 			//NEGOCIO ALQUILER
 			case ListaComandos.NEGOCIOALTAALQUILER:
 				comando = new AltaAlquilerCommand();

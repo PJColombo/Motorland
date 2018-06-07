@@ -1,4 +1,4 @@
-package Presentacion.vistas.vistaAlquiler;
+package Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente;
 
 import Presentacion.controlador.Context;
 

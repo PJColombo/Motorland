@@ -4,10 +4,11 @@
 package Presentacion.vistas.vistaPrincipal;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
-import Presentacion.vistas.vistaAlquiler.AlquilerEmergenteGUI;
+import Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente.AlquilerEmergenteGUI;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -25,11 +26,7 @@ public class VistaPrincipalImp extends VistaPrincipal {
 	
 	public VistaPrincipalImp() 
 	{
-		java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            	vPrincipal = new PrincipalGUI();
-            }
-        });
+		vPrincipal = new PrincipalGUI();
 	}
 
 	/** 
@@ -39,12 +36,10 @@ public class VistaPrincipalImp extends VistaPrincipal {
 	 */
 	public void update(Context contexto) {
 		if(contexto.getEvent() == ListaComandos.VISTAMENUPRINCIPAL ||
-				contexto.getEvent() == ListaComandos.CERRAR_VISTA_ALQUILER){
-			java.awt.EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-	            	vPrincipal.setVisible(true);
-	            }
-	        });
+				contexto.getEvent() == ListaComandos.CERRAR_VISTA_ALQUILER ||
+				contexto.getEvent() == ListaComandos.CERRAR_VISTA_CLIENTE ||
+				contexto.getEvent() == ListaComandos.CERRAR_VISTA_VEHICULO){
+	            vPrincipal.setVisible(true);
 		}
 		else if(contexto.getEvent() == ListaComandos.CERRAR_VISTA_PRINCIPAL) {
 			vPrincipal.setVisible(false);

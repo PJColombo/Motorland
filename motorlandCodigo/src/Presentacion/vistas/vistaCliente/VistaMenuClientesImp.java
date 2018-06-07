@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import com.sun.codemodel.JOp;
+
 import Negocio.Cliente.TCliente;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
@@ -23,10 +25,10 @@ public class VistaMenuClientesImp extends VistaMenuClientes {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Clientes vClientes;
-	private static final String SEPARATOR = "----------------------------------";
+	private ClienteGUI vClientes;
+	
 	public VistaMenuClientesImp(){
-		vClientes = new Clientes();
+		vClientes = new ClienteGUI();
 	}
 	
 
@@ -83,10 +85,11 @@ public class VistaMenuClientesImp extends VistaMenuClientes {
 		else if(contexto.getEvent() == ListaComandos.MOSTRARCONSULTARCLIENTE){
 			
 			if((TCliente)contexto.getData() != null){
-				vClientes.setComponentes((TCliente)contexto.getData());
+				vClientes.muestra((TCliente)contexto.getData());
 			}
 			else{
-				JOptionPane.showMessageDialog(null,"Error al consultar el cliente");
+				JOptionPane.showMessageDialog(vClientes,"Error al consultar el cliente", 
+						"Consulta cliente", JOptionPane.ERROR_MESSAGE);
 			}
 			
 			
@@ -114,24 +117,36 @@ public class VistaMenuClientesImp extends VistaMenuClientes {
 		else if(contexto.getEvent() == ListaComandos.MOSTRARLISTACLIENTE){
 			StringBuilder mensajeLista = new StringBuilder();
 			ArrayList<TCliente> lista = ((ArrayList<TCliente>) contexto.getData());
-			if (lista.size() > 0){
-				String suma = "";
-				for(int i = 0; i < lista.size(); i++){
-					suma += lista.get(i).toString() + VistaMenuClientesImp.SEPARATOR +"\n";
-				}
-				vClientes.setLista(suma);
-			}
+			TCliente[] listaConFormato = new TCliente[lista.size()];
+			
+			vClientes.muestra(lista.toArray(listaConFormato));
 				
 			
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARCLIENTEVIP){
 			if((TCliente)contexto.getData() != null){
-				vClientes.setComponentes((TCliente)contexto.getData());
+				vClientes.muestra((TCliente)contexto.getData());
 			}
 			else{
 				JOptionPane.showMessageDialog(null,"Error al consultar el cliente VI");
 			}
 			
+		}
+		else if(contexto.getEvent() == ListaComandos.MOSTRAR_ELIMINA_CLIENTE) {
+			switch((int) contexto.getData()){
+				case -1:
+					JOptionPane.showMessageDialog(vClientes,"El cliente no existe.", "Elimina cliente", JOptionPane.INFORMATION_MESSAGE);
+				break;
+				case -2:
+					JOptionPane.showMessageDialog(vClientes,"Error al intentar eliminar el cliente", "Elimina cliente", JOptionPane.ERROR_MESSAGE);
+				break;
+				default:
+					JOptionPane.showMessageDialog(vClientes,"El cliente se ha eliminado con éxito! ", "Elimina cliente", JOptionPane.INFORMATION_MESSAGE);
+				break;
+			}
+		}
+		else if(contexto.getEvent() == ListaComandos.CERRAR_VISTA_CLIENTE) {
+			vClientes.setVisible(false);
 		}
 		
 	}
