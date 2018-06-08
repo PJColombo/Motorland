@@ -15,8 +15,6 @@ public class TransactionMySQL implements Transaction {
 	@Override
 	public void start() throws Exception {
 		try {
-			/*this.connection = DriverManager.getConnection("jdbc:mysql://" +
-					"den1.mysql3.gear.host:3306/motorlanddb?autoReconnect=true&useSSL=true","motorlanddb",	"123-abc");*/
 			connection = (Connection) ConnectionPoolFactory.getInstance().getConnection(); 
 			this.connection.setAutoCommit(false);
 		} catch (SQLException e) {

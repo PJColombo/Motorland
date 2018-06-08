@@ -20,5 +20,5 @@ public interface ASCliente {
     public TCliente detalleCliente(int id) throws Exception;
     public ArrayList<TCliente> listaCliente() throws Exception;
     public int eliminaCliente(int id); 
-	public TCliente clienteVip();
+	public TCliente clienteVip() throws Exception;
 }

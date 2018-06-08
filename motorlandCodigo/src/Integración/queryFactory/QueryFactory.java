@@ -28,7 +28,7 @@ public abstract class QueryFactory {
 	public synchronized static QueryFactory getInstance() {
 		
 		if (QueryFactory.queryFactory == null)
-			QueryFactory.queryFactory = new QueryFactoryImp(); 
+			QueryFactory.queryFactory = new QueryFactoryImpDinamica(); 
 		
 		return QueryFactory.queryFactory;
 	}

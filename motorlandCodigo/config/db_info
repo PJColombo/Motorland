@@ -1,0 +1,5 @@
+host=den1.mysql3.gear.host
+port=3306
+database=motorlanddb
+user=motorlanddb
+password=123-abc

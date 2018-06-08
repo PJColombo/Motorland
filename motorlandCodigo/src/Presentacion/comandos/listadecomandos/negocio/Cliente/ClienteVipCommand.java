@@ -11,7 +11,12 @@ public class ClienteVipCommand implements Command {
 	@Override
 	public Context execute(Object data) {
 		// TODO Auto-generated method stub
-		TCliente t = ASFactory.getInstance().createSACliente().clienteVip();
+		TCliente t;
+		try {
+			t = ASFactory.getInstance().createSACliente().clienteVip();
+		} catch (Exception e) {
+			return new Context(ListaComandos.MOSTRARCLIENTEVIP, e);
+		}
 		return new Context (ListaComandos.MOSTRARCLIENTEVIP, t);
 	}
 

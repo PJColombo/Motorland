@@ -443,25 +443,9 @@ public class ClienteGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminaBActionPerformed
 
     private void clienteVipBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteVipBActionPerformed
-    	int id;
         
-        try {
-        	if(idTF.getText().isEmpty())
-        		JOptionPane.showMessageDialog(this,"Campo ID vacío.", "Consulta cliente VIP",
-        				JOptionPane.ERROR_MESSAGE);
-        	else {
-        		id = Integer.parseInt(idTF.getText());
-        		
-        		if(id <= 0)
-        			throw new NumberFormatException(); 
-        		
-        		Controller.getInstance().run(ListaComandos.NEGOCIOCLIENTEVIP, id);
-        	}
-        }
-        catch(NumberFormatException e) {
-        	JOptionPane.showMessageDialog(this,"Formato del campo ID incorrecto. Introduzca un numero entero positivo.", "Consulta cliente VIP",
-    				JOptionPane.ERROR_MESSAGE);
-        }
+        Controller.getInstance().run(ListaComandos.NEGOCIOCLIENTEVIP, null);
+
     }//GEN-LAST:event_clienteVipBActionPerformed
 
     private void limpiarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarBActionPerformed

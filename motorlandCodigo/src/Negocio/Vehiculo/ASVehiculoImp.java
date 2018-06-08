@@ -228,13 +228,18 @@ public class ASVehiculoImp implements ASVehiculo {
 			TransactionManager.getInstance().newTransaction();
 			tr = TransactionManager.getInstance().getTransaction();
 			
-			tr.start();
+			Query q = QueryFactory.getInstance().newQuery("VehiculoMasAlquilado");
 			
-			Query q = QueryFactory.getInstance().newQuery("");
+			if(q != null) {
+				tr.start();
+				
+				vVIP = (TVehiculo) q.execute(null);
 			
-			vVIP = (TVehiculo) q.execute(null);
+				tr.commit();	
+			}
+			else
+				throw new Exception("Error al cargar la query."); 
 			
-			tr.commit();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

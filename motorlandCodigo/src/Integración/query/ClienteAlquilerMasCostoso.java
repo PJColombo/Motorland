@@ -25,7 +25,7 @@ public class ClienteAlquilerMasCostoso implements Query {
 		try {
 			tr = TransactionManager.getInstance().getTransaction();
 			cn = (Connection) tr.getResource();
-			ps = cn.prepareStatement("SELECT idCliente, MAX(costeTotal FROM alquiler" + forUpdate);
+			ps = cn.prepareStatement("SELECT idCliente, MAX(costeTotal) FROM alquiler" + forUpdate);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				idClienteVIP = rs.getInt(1);

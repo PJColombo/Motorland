@@ -11,6 +11,7 @@ import Integración.Cliente.DAOCliente;
 import Integración.DAOFactory.DaoFactory;
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
+import Integración.query.Query;
 import Integración.queryFactory.QueryFactory;
 
 /** 
@@ -199,23 +200,27 @@ public class ASClienteImp implements ASCliente {
 	}
 
 	@Override
-	public TCliente clienteVip() {
+	public TCliente clienteVip() throws Exception {
 		Transaction tr;
 		TCliente vip = null;
-		
+		Query q = null; 
 		try {
 			TransactionManager.getInstance().newTransaction();
 			
 			tr = TransactionManager.getInstance().getTransaction();
 			
-			tr.start();
+			q = (Query) QueryFactory.getInstance().newQuery("ClienteAlquilerMasCostoso");
 			
-			vip = (TCliente) QueryFactory.getInstance().newQuery("");
-			
-			tr.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			if(q != null) {
+				tr.start();
+				
+				vip = (TCliente) q.execute(null);
+				
+				tr.commit();
+			}
+			else
+				throw new Exception("Error al cargar la query"); 
+		} 
 		finally {
 			TransactionManager.getInstance().deleteTransaction();
 		}
