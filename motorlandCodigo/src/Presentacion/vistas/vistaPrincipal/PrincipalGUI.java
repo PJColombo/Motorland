@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
+import Presentacion.comandos.listadecomandos.ListaComandosJPA;
 import Presentacion.controlador.Controller;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -186,7 +187,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonClientesActionPerformed
 
     private void jButtonDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepartamentoActionPerformed
-        JOptionPane.showMessageDialog(null,"En mantenimiento");
+        Controller.getInstance().run(ListaComandosJPA.VISTA_MENU_DEPARTAMENTO, null);
     }//GEN-LAST:event_jButtonDepartamentoActionPerformed
 
     private void jButtonConcesionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcesionarioActionPerformed

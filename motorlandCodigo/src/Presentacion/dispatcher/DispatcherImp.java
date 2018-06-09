@@ -4,11 +4,13 @@
 package Presentacion.dispatcher;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
+import Presentacion.comandos.listadecomandos.ListaComandosJPA;
 import Presentacion.controlador.Context;
 import Presentacion.vistas.vistaAcercaDe.VistaAcercaDe;
 import Presentacion.vistas.vistaAlquiler.VistaMenuAlquiler;
 import Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente.VistaMenuAlquilerEmergente;
 import Presentacion.vistas.vistaCliente.VistaMenuClientes;
+import Presentacion.vistas.vistaDepartamento.VistaDepartamento;
 import Presentacion.vistas.vistaPrincipal.VistaPrincipal;
 import Presentacion.vistas.vistaVehiculo.VistaMenuVehiculo;
 
@@ -114,6 +116,35 @@ public class DispatcherImp extends Dispatcher {
 			break;
 			case ListaComandos.VISTA_MENU_ALTA_ALQUILER_EMERGENTE:
 				VistaMenuAlquilerEmergente.getInstance().update(context);
+			break;
+			
+			
+			//JPA
+			
+			case ListaComandosJPA.VISTA_MENU_DEPARTAMENTO:
+				VistaPrincipal.getInstance().update(context);
+				VistaDepartamento.getInstance().update(context);
+			break;
+			case ListaComandosJPA.CERRAR_VISTA_DEPARTAMENTO:
+				VistaDepartamento.getInstance().update(context);
+				VistaPrincipal.getInstance().update(context);
+			break;
+			
+			
+			case ListaComandosJPA.MOSTRAR_ALTA_DEPARTAMENTO:
+				VistaDepartamento.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_BAJA_DEPARTAMENTO:
+				VistaDepartamento.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_MODIFICA_DEPARTAMENTO:
+				VistaDepartamento.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_CONSULTA_DEPARTAMENTO:
+				VistaDepartamento.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_LISTA_DEPARTAMENTOS:
+				VistaDepartamento.getInstance().update(context);
 			break;
 		}
 	}

@@ -1,0 +1,218 @@
+package Negocio.concesionario;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
+
+import Negocio.departamento.Departamento2;
+
+@Entity
+public class Concesionario {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Version
+	private Integer version;
+	
+	private String nombre;
+	private String direccion;
+	private boolean activo;
+	
+	/*@ManyToMany
+	private Collection<Departamento> departamentos;*/
+	
+	@OneToMany(mappedBy="concesionario")
+	private Collection<ConcesionarioDepartamento> concesionariosDepartamentos;
+	
+	public Concesionario() {
+		concesionariosDepartamentos = new ArrayList<>();
+		activo = true;
+	}
+	
+	public Concesionario(String nombre, String direccion) {
+		concesionariosDepartamentos = new ArrayList<>();
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.activo = true;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+	public Collection<ConcesionarioDepartamento> getConcesionariosDepartamentos() {
+		return concesionariosDepartamentos;
+	}
+
+	public void setConcesionariosDepartamentos(Collection<ConcesionarioDepartamento> concesionariosDepartamentos) {
+		this.concesionariosDepartamentos = concesionariosDepartamentos;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+	
+	public void agregaConcesionarioDepartamento(ConcesionarioDepartamento cd) {
+		this.concesionariosDepartamentos.add(cd);
+	}
+	
+	public void eliminaConcesionarioDepartamento(ConcesionarioDepartamento cd) {
+		this.concesionariosDepartamentos.remove(cd);
+	}
+	
+}
+
+----------------------------------
+
+package Negocio.concesionario;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+import Negocio.departamento.Departamento2;
+
+/**
+ * Entity implementation class for Entity: ConcesionarioDepartamento
+ *
+ */
+@Entity
+public class ConcesionarioDepartamento implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	@EmbeddedId
+	private ConcesionarioDepartamentoID concesionarioDepartamentoID; 
+	
+	@ManyToOne
+	@MapsId("concesionarioID")
+	private Concesionario concesionario;
+	
+	@ManyToOne
+	@MapsId("departamentoID")
+	private Departamento2 departamento;
+	
+	@Version
+	private Integer version; 
+	
+	private Double presupuesto; 
+	
+	public ConcesionarioDepartamento() {
+		super();
+	}
+	
+	public ConcesionarioDepartamento(Concesionario concesionario, Departamento2 departamento) {
+		this.concesionario = concesionario; 
+		this.departamento = departamento;
+	}
+
+	public Concesionario getConcesionario() {
+		return concesionario;
+	}
+
+	public void setConcesionario(Concesionario concesionario) {
+		this.concesionario = concesionario;
+	}
+
+	public Departamento2 getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento2 departamento) {
+		this.departamento = departamento;
+	}
+
+	public Double getPresupuesto() {
+		return presupuesto;
+	}
+
+	public void setPresupuesto(Double presupuesto) {
+		this.presupuesto = presupuesto;
+	}
+	
+	
+}
+
+-------------------------------------
+
+package Negocio.concesionario;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+/**
+ * Entity implementation class for Entity: ConcesionarioDepartamentoID
+ *
+ */
+@Embeddable
+public class ConcesionarioDepartamentoID implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
+	private int concesionarioID;
+	private int departamentoID;
+	
+	public ConcesionarioDepartamentoID() {
+		super();
+	}
+   
+	public ConcesionarioDepartamentoID(int concesionarioID, int departamentoID) {
+		this.concesionarioID = concesionarioID;
+		this.departamentoID = departamentoID;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + concesionarioID;
+		result = prime * result + departamentoID;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ConcesionarioDepartamentoID other = (ConcesionarioDepartamentoID) obj;
+		if (concesionarioID != other.concesionarioID)
+			return false;
+		if (departamentoID != other.departamentoID)
+			return false;
+		return true;
+	}
+
+	
+	
+	
+}

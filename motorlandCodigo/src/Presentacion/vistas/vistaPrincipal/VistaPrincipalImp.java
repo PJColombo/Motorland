@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
+import Presentacion.comandos.listadecomandos.ListaComandosJPA;
 import Presentacion.controlador.Context;
-import Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente.AlquilerEmergenteGUI;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -45,6 +45,19 @@ public class VistaPrincipalImp extends VistaPrincipal {
 			vPrincipal.setVisible(false);
 			JOptionPane.showMessageDialog(vPrincipal, "Hasta luego! ", "Salir", JOptionPane.INFORMATION_MESSAGE);
 			System.exit(0);
+		}
+		
+		
+		
+		//JPA
+		
+		else if(contexto.getEvent() == ListaComandosJPA.CERRAR_VISTA_DEPARTAMENTO ||
+				contexto.getEvent() == ListaComandosJPA.CERRAR_VISTA_EMPLEADO ||
+				contexto.getEvent() == ListaComandosJPA.CERRAR_VISTA_CONCESIONARIO) {
+			vPrincipal.setVisible(true);
+		}
+		else if(contexto.getEvent() == ListaComandosJPA.VISTA_MENU_DEPARTAMENTO) {
+			vPrincipal.setVisible(false);
 		}
 	}
 }

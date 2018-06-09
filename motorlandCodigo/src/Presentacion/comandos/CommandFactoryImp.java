@@ -4,6 +4,7 @@
 package Presentacion.comandos;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
+import Presentacion.comandos.listadecomandos.ListaComandosJPA;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.AltaAlquilerCommand;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.BajaAlquilerCommand;
 import Presentacion.comandos.listadecomandos.negocio.Alquiler.IniciaModificarAlquilerCommand;
@@ -23,6 +24,11 @@ import Presentacion.comandos.listadecomandos.negocio.Vehiculo.BuscarVehiculoComm
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ComprobarAutonomiaCommand;
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ListarVehiculoCommand;
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ModificarVehiculoCommand;
+import Presentacion.comandos.listadecomandos.negocio.departamento.AltaDepartamentoCommand;
+import Presentacion.comandos.listadecomandos.negocio.departamento.BajaDepartamentoCommand;
+import Presentacion.comandos.listadecomandos.negocio.departamento.ConsultaDepartamentoCommand;
+import Presentacion.comandos.listadecomandos.negocio.departamento.ListaDepartamentosCommand;
+import Presentacion.comandos.listadecomandos.negocio.departamento.ModificaDepartamentoCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerEmergenteCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaClienteCommand;
@@ -36,6 +42,8 @@ import Presentacion.comandos.listadecomandos.vistas.VistaMenuClienteCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuModificarAlquilerEmergente;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuPrincipalCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuVehiculoCommand;
+import Presentacion.comandos.listadecomandos.vistas.departamento.CerrarVistaDepartamentoCommand;
+import Presentacion.comandos.listadecomandos.vistas.departamento.VistaMenuDepartamentoCommand;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -151,6 +159,40 @@ public class CommandFactoryImp extends CommandFactory {
 			case ListaComandos.NEGOCIOMODIFICARVEHICULO:
 				comando = new ModificarVehiculoCommand();
 			break;
+			
+			
+			//JPA
+			
+			//VISTAS
+			case ListaComandosJPA.VISTA_MENU_DEPARTAMENTO:
+				comando = new VistaMenuDepartamentoCommand();
+			break;
+			
+			case ListaComandosJPA.CERRAR_VISTA_DEPARTAMENTO:
+				comando = new CerrarVistaDepartamentoCommand();
+			break;
+			
+			//NEGOCIO
+			
+			//Departamento
+			case ListaComandosJPA.NEGOCIO_ALTA_DEPARTAMENTO:
+				comando = new AltaDepartamentoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_BAJA_DEPARTAMENTO:
+				comando = new BajaDepartamentoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_MODIFICA_DEPARTAMENTO:
+				comando = new ModificaDepartamentoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_CONSULTA_DEPARTAMENTO:
+				comando = new ConsultaDepartamentoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_LISTA_DEPARTAMENTOS:
+				comando = new ListaDepartamentosCommand();
+			break;
+			
+			
+			//Empleado
 		}
 		return comando;
 	}

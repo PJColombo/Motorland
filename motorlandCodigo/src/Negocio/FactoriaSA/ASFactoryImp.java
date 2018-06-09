@@ -9,6 +9,8 @@ import Negocio.Cliente.ASCliente;
 import Negocio.Cliente.ASClienteImp;
 import Negocio.Vehiculo.ASVehiculo;
 import Negocio.Vehiculo.ASVehiculoImp;
+import Negocio.departamento.ASDepartamento;
+import Negocio.departamento.ASDepartamentoImp;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -31,5 +33,16 @@ public class ASFactoryImp extends ASFactory {
 	@Override
 	public ASAlquiler createSAAlquiler() {
 		return new ASAlquilerImp();
+	}
+
+	
+	
+	//JPA 
+	
+	
+	
+	@Override
+	public ASDepartamento createASDepartamento() {
+		return new ASDepartamentoImp();
 	}
 }

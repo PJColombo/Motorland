@@ -7,32 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 import Negocio.concesionario.ConcesionarioDepartamento;
 import Negocio.empleado.Empleado;
-import javax.persistence.Table;
 
 @Entity
-@Table(schema = "motorlanddb")
-@NamedQueries({
-		
-	@NamedQuery(name = "Departamento.findByid", query = "SELECT d FROM Departamento d WHERE d.iddepartamento = :id"),
-		
-	@NamedQuery(name = "Departamento.findByNombre", query = "SELECT d FROM Departamento d WHERE d.nombre = :nombre"),
-	
-	@NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d") 
-})
 public class Departamento {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer iddepartamento;
+	private Integer id;
 	
 	@Version
 	private Integer version;
-	
 	private String nombre; 
 	private boolean activo;
 	
@@ -54,13 +42,6 @@ public class Departamento {
 		activo = true; 
 	}
 	
-	public Departamento(int id, String nombre) {
-		empleados = new ArrayList<>();
-		concesionariosDepartamentos = new ArrayList<>();
-		this.iddepartamento = id;
-		this.nombre = nombre;
-		this.activo = true;
-	}
 	public Departamento(String nombre) {
 		empleados = new ArrayList<>();
 		concesionariosDepartamentos = new ArrayList<>();
@@ -70,7 +51,7 @@ public class Departamento {
 	
 	
 	public Integer getId() {
-		return iddepartamento;
+		return id;
 	}
 	
 	public String getNombre() {
@@ -109,36 +90,5 @@ public class Departamento {
 	public void eliminaConcesionarioDepartamento(ConcesionarioDepartamento cd) {
 		this.concesionariosDepartamentos.remove(cd);
 	}
-
-	@Override
-	public String toString() {
-		String s = "ID: " + iddepartamento + "\n"
-				+ "NOMBRE: " + nombre + "\n"
-				+ "ESTADO: ";
-		if(activo)
-			s += "ACTIVO " + "\n";
-		else
-			s += "INACTIVO " + "\n";
-		s+= "EMPLEADOS: " + "\n";
-		if(empleados.isEmpty())
-			s += "No hay empleados. " + "\n";
-		else {
-			for (Empleado e : empleados) {
-				s += "\t -ID EMPLEADO : " + e.getId() + "\n"
-				+ "\t NOMBRE: " + e.getNombre() + "\n"
-				+ "\t DNI: " + e.getDni();
-			}
-		}
-		if(concesionariosDepartamentos.isEmpty())
-			s += "No hay concesionarios. " + "\n";
-		else {
-			for (ConcesionarioDepartamento cd : concesionariosDepartamentos) {
-				s += "\t -ID Concesionario: " + cd.getConcesionario() + "\n"
-						+ "\t PRESUPUESTO: " + cd.getPresupuesto() + "\n";
-			}
-		}
-		return s;
-	}
-	
 	
 }
