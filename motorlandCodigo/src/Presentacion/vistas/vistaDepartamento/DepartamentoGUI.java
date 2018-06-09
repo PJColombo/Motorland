@@ -11,13 +11,14 @@ import javax.swing.JOptionPane;
 import Negocio.departamento.Departamento;
 import Presentacion.comandos.listadecomandos.ListaComandosJPA;
 import Presentacion.controlador.Controller;
-import Presentacion.vistas.vistaPrincipal.PrincipalGUI;
 
 /**
  *
  * @author USUARIO
  */
 public class DepartamentoGUI extends javax.swing.JFrame {
+	
+	private final String SEPARATOR = "\n -------------------------------------------------------------- \n";
 
     /**
      * Creates new form DepartamentoGUI
@@ -30,6 +31,7 @@ public class DepartamentoGUI extends javax.swing.JFrame {
     
     public void muestra(String texto) {
     	departamentoTA.append(texto);
+    	departamentoTA.append(SEPARATOR);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -297,8 +299,8 @@ public class DepartamentoGUI extends javax.swing.JFrame {
     	}
     }                                                     
 
-    private void listaDepartamentosBActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        // TODO add your handling code here:
+    private void listaDepartamentosBActionPerformed(java.awt.event.ActionEvent evt) {
+    	Controller.getInstance().run(ListaComandosJPA.NEGOCIO_LISTA_DEPARTAMENTOS, null);
     }                                                   
 
     private void limpiarBActionPerformed(java.awt.event.ActionEvent evt) {                                         

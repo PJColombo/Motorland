@@ -1,5 +1,8 @@
 package Presentacion.vistas.vistaDepartamento;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import Negocio.departamento.Departamento;
@@ -88,6 +91,21 @@ public class VistaDepartamentoImp extends VistaDepartamento {
 				tipo = JOptionPane.ERROR_MESSAGE;
 				JOptionPane.showMessageDialog(vDepartamento, mensaje,
 						"Modifica departamento", tipo);
+			}
+			
+		}
+		else if(contexto.getEvent() == ListaComandosJPA.MOSTRAR_LISTA_DEPARTAMENTOS) {
+			List<Departamento> l = (List<Departamento>) contexto.getData();
+			
+			if(l != null) {
+				for (Departamento d : l)
+					vDepartamento.muestra(d.toString());
+			}
+			else {
+				mensaje = "No hay departamentos para mostrar.";
+				tipo = JOptionPane.INFORMATION_MESSAGE;
+				JOptionPane.showMessageDialog(vDepartamento, mensaje,
+						"Lista departaments", tipo);
 			}
 			
 		}

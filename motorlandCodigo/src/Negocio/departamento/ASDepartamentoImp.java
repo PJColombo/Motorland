@@ -219,9 +219,9 @@ public class ASDepartamentoImp implements ASDepartamento {
 			
 			tr.begin();
 			
-			q = em.createNamedQuery("Negocio.departamento.Departamento.findAll", Departamento.class);
+			q = em.createNamedQuery("Departamento.findAll", Departamento.class);
 			
-			l = q.getResultList();
+			l = (List<Departamento>) q.getResultList();
 		}
 		finally {
 			if(em != null)

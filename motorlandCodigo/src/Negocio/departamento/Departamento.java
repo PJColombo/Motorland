@@ -137,6 +137,8 @@ public class Departamento {
 						+ "\t PRESUPUESTO: " + cd.getPresupuesto() + "\n";
 			}
 		}
+		
+		s += "\n";
 		return s;
 	}
 	
