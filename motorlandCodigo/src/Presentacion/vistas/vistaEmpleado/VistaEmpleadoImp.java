@@ -1,7 +1,11 @@
 package Presentacion.vistas.vistaEmpleado;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
+import Negocio.FactoriaSA.ASFactory;
+import Negocio.empleado.Empleado;
 import Presentacion.comandos.listadecomandos.ListaComandosJPA;
 import Presentacion.controlador.Context;
 
@@ -107,6 +111,30 @@ public class VistaEmpleadoImp extends VistaEmpleado {
 			}
 			JOptionPane.showMessageDialog(vEmpleado, mensaje, "Modifica empleado",
 					tipo);
+		}
+		else if(contexto.getEvent() == ListaComandosJPA.MOSTRAR_CONSULTA_EMPLEADO) {
+			Empleado e = (Empleado) contexto.getData();
+			
+			if(e != null) {
+				vEmpleado.muestra(e.toString());
+			}
+			else
+				JOptionPane.showMessageDialog(vEmpleado, "El empleado no existe.", "Consulta empleado",
+						JOptionPane.ERROR_MESSAGE);
+		}
+		else if(contexto.getEvent() == ListaComandosJPA.MOSTRAR_LISTA_EMPLEADOS) {
+			List<Empleado> l;
+			
+			l = (List<Empleado>) ASFactory.getInstance().createASEmpleado().listaEmpleados();
+			
+			if(l == null) {
+				JOptionPane.showMessageDialog(vEmpleado, "No hay empleados para mostrar.", "Muestra empleado",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			else {
+				for (Empleado empleado : l)
+					vEmpleado.muestra(empleado.toString());
+			}
 		}
 	}
 

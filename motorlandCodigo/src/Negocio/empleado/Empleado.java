@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import Negocio.departamento.Departamento;
+import Presentacion.vistas.vistaCalendario.DateLabelFormatter;
+
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedQueries;
 
@@ -103,6 +105,34 @@ public class Empleado {
 	}
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
+	}
+
+	@Override
+	public String toString() {
+		String s; 
+		s = "ID: " + idempleado + "\n" +
+		"DEPARTAMENTO: " + departamento.getNombre() + "\n" +
+		"NOMBRE: " + nombre + "\n" +
+		"DNI: " + dni + "\n" +
+		"DOMICILIO: " + domicilio + "\n" +
+		"CUENTA: " + cuenta + "\n";
+		if(this instanceof EmpleadoFijo)
+			s += "ANTIGÜEDAD: " + ((EmpleadoFijo) this).getAntiguedad() + "\n";
+		else if(this instanceof EmpleadoTemporal) {
+			DateLabelFormatter dlf = new DateLabelFormatter();
+			try {
+			s += "FECHA INICIO: " + dlf.valueToString(DateLabelFormatter.toCalendar(((EmpleadoTemporal) this).getFechaIni())) + "\n"
+			+ "FECHA FIN: " + dlf.valueToString(DateLabelFormatter.toCalendar(((EmpleadoTemporal) this).getFechaFin())) + "\n";
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+				System.err.println("Error al parsear la fecha.");
+			}
+		}
+		s += "ACTIVO: "; s+= (activo) ? "ACTIVO" : "INACTIVO";
+		s += "\n";
+		
+		return s;
 	}
 	
 	

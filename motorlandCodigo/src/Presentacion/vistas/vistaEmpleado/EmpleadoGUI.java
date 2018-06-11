@@ -26,6 +26,10 @@ public class EmpleadoGUI extends javax.swing.JFrame{
         initComponents();
     }
 
+    public void muestra(String texto) {
+    	empleadoTA.append(texto);
+    	empleadoTA.append(SEPARATOR);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -477,23 +481,31 @@ public class EmpleadoGUI extends javax.swing.JFrame{
     	    	Date fechaF = null;
     	    	int anti = 0;
     	    	
-    	    	Empleado e;
+    	    	Empleado e = null;
     	    	
+    	    	boolean ordenCronologico = true;
     	    	if (tipo.equals("TEMPORAL")){
-    	    		fechaI = DateLabelFormatter.toDate(calendarioI.getFecha());
-    	    		fechaF = DateLabelFormatter.toDate(calendarioF.getFecha());
+    	    		if(!calendarioI.isEmpty())
+    	    			fechaI = DateLabelFormatter.toDate(calendarioI.getFecha());
+    	    		if(!calendarioF.isEmpty())
+    	    			fechaF = DateLabelFormatter.toDate(calendarioF.getFecha());
+    	    		
+    	    		if((fechaI != null && fechaF != null) && fechaI.compareTo(fechaF) > 0)
+    	    			ordenCronologico = false;
     	    		e = new EmpleadoTemporal(id, dni, nombre, domicilio, cuenta, departamento,
-    						true, fechaI, fechaF);
+	    					true, fechaI, fechaF);
     	    	}
     	    	else if(tipo.equals("FIJO")) {
     	    		if(!antigTF.getText().isEmpty())
     	    			anti = Integer.parseInt(antigTF.getText());
     	    		e = new EmpleadoFijo(id, dni, nombre, domicilio, cuenta, departamento, true, anti);
     	    	}
-    	    	else
-    	    		e = null; 
     	    	
-    			Controller.getInstance().run(ListaComandosJPA.NEGOCIO_MODIFICA_EMPLEADO, e);
+    	    	if(ordenCronologico)
+    	    		Controller.getInstance().run(ListaComandosJPA.NEGOCIO_MODIFICA_EMPLEADO, e);
+    	    	else
+    	    		JOptionPane.showMessageDialog(this, "La fecha inicial es mayor que la fecha final.", "Modifica empleado",
+        					JOptionPane.ERROR_MESSAGE);
     		}
     		catch(NumberFormatException e) {
     			JOptionPane.showMessageDialog(this, "Formato del campo ID o anitgüedad incorrecto", "Modifica empleado",
@@ -506,12 +518,27 @@ public class EmpleadoGUI extends javax.swing.JFrame{
     	}
     }                                         
 
-    private void consultaBActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
+    private void consultaBActionPerformed(java.awt.event.ActionEvent evt) {  
+    	int id;
+    	if(!idTF.getText().isEmpty()) {
+    		try {
+    			id = Integer.parseInt(idTF.getText());
+    			Controller.getInstance().run(ListaComandosJPA.NEGOCIO_CONSULTA_EMPLEADO, id);
+    		}
+    		catch(NumberFormatException e) {
+    			JOptionPane.showMessageDialog(this, "Formato del campo ID incorrecto", "Consulta empleado",
+    					JOptionPane.ERROR_MESSAGE);
+    		}
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(this, "Introduzca un ID de empleado", "Consulta empleado",
+					JOptionPane.ERROR_MESSAGE);
+    	}
+    	
     }                                         
 
-    private void listaBActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        // TODO add your handling code here:
+    private void listaBActionPerformed(java.awt.event.ActionEvent evt) {   
+    	Controller.getInstance().run(ListaComandosJPA.NEGOCIO_LISTA_EMPLEADOS, null);
     }                                      
 
     private void limpiarBActionPerformed(java.awt.event.ActionEvent evt) {                                         

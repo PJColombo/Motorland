@@ -4,7 +4,7 @@ import Presentacion.controlador.Context;
 
 
 public abstract class VistaEmpleado {
-private static VistaEmpleado instance; 
+	private static VistaEmpleado instance; 
 	
 	public static VistaEmpleado getInstance() {
 		// begin-user-code

@@ -262,9 +262,10 @@ public class ASEmpleadoImp implements ASEmpleado {
 							if(((EmpleadoFijo) e).getAntiguedad() > 0)
 								((EmpleadoFijo) emp).setAntiguedad(((EmpleadoFijo) e).getAntiguedad());
 						}
-						
-						res = 1;
-						tr.commit();
+						if(res == 0) {
+							res = 1;
+							tr.commit();
+						}
 					}
 					//El tipo de empleado que se quiere modificar es diferente.
 					else {
@@ -348,7 +349,7 @@ public class ASEmpleadoImp implements ASEmpleado {
 			
 			tr.begin();
 
-			q = em.createQuery("Empleado.findAll");
+			q = em.createNamedQuery("Empleado.findAll");
 			l = q.getResultList();
 			
 			tr.commit();

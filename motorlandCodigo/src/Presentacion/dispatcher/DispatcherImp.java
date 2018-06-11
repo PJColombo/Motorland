@@ -10,6 +10,7 @@ import Presentacion.vistas.vistaAcercaDe.VistaAcercaDe;
 import Presentacion.vistas.vistaAlquiler.VistaMenuAlquiler;
 import Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente.VistaMenuAlquilerEmergente;
 import Presentacion.vistas.vistaCliente.VistaMenuClientes;
+import Presentacion.vistas.vistaConcesionario.VistaConcesionario;
 import Presentacion.vistas.vistaDepartamento.VistaDepartamento;
 import Presentacion.vistas.vistaEmpleado.VistaEmpleado;
 import Presentacion.vistas.vistaPrincipal.VistaPrincipal;
@@ -140,7 +141,14 @@ public class DispatcherImp extends Dispatcher {
 				VistaPrincipal.getInstance().update(context);
 			break;
 			
-			
+			case ListaComandosJPA.VISTA_MENU_CONCESIONARIO:
+				VistaPrincipal.getInstance().update(context);
+				VistaConcesionario.getInstance().update(context);
+			break;
+			case ListaComandosJPA.CERRAR_VISTA_CONCESIONARIO:
+				VistaConcesionario.getInstance().update(context);
+				VistaPrincipal.getInstance().update(context);
+			break;
 			
 			case ListaComandosJPA.MOSTRAR_ALTA_DEPARTAMENTO:
 				VistaDepartamento.getInstance().update(context);
@@ -173,6 +181,23 @@ public class DispatcherImp extends Dispatcher {
 			break;
 			case ListaComandosJPA.MOSTRAR_LISTA_EMPLEADOS:
 				VistaEmpleado.getInstance().update(context);
+			break;
+			
+			
+			case ListaComandosJPA.MOSTRAR_ALTA_CONCESIONARIO:
+				VistaConcesionario.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_BAJA_CONCESIONARIO:
+				VistaConcesionario.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_MODIFICA_CONCESIONARIO:
+				VistaConcesionario.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_CONSULTA_CONCESIONARIO:
+				VistaConcesionario.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_LISTA_CONCESIONARIOS:
+				VistaConcesionario.getInstance().update(context);
 			break;
 		}
 	}

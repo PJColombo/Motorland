@@ -41,8 +41,8 @@ public class EmpleadoTemporal extends Empleado implements Serializable {
 	public EmpleadoTemporal(int id, String dni, String nombre, String domicilio, String cuenta,
 			Departamento departamento, boolean activo, Date fechaI, Date fechaF) {
 		super(id, dni, nombre, domicilio, cuenta, departamento, activo);
-		this.fechaIni = fechaIni;
-		this.fechaFin = fechaFin;
+		this.fechaIni = fechaI;
+		this.fechaFin = fechaF;
 	}
 
 	public Date getFechaIni() {
