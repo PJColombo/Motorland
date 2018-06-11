@@ -29,6 +29,11 @@ import Presentacion.comandos.listadecomandos.negocio.departamento.BajaDepartamen
 import Presentacion.comandos.listadecomandos.negocio.departamento.ConsultaDepartamentoCommand;
 import Presentacion.comandos.listadecomandos.negocio.departamento.ListaDepartamentosCommand;
 import Presentacion.comandos.listadecomandos.negocio.departamento.ModificaDepartamentoCommand;
+import Presentacion.comandos.listadecomandos.negocio.empleado.AltaEmpleadoCommand;
+import Presentacion.comandos.listadecomandos.negocio.empleado.BajaEmpleadoCommand;
+import Presentacion.comandos.listadecomandos.negocio.empleado.ConsultaEmpleadoCommand;
+import Presentacion.comandos.listadecomandos.negocio.empleado.ListaEmpleadoCommand;
+import Presentacion.comandos.listadecomandos.negocio.empleado.ModificaEmpleadoCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerEmergenteCommand;
 import Presentacion.comandos.listadecomandos.vistas.CerrarVistaClienteCommand;
@@ -44,6 +49,8 @@ import Presentacion.comandos.listadecomandos.vistas.VistaMenuPrincipalCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuVehiculoCommand;
 import Presentacion.comandos.listadecomandos.vistas.departamento.CerrarVistaDepartamentoCommand;
 import Presentacion.comandos.listadecomandos.vistas.departamento.VistaMenuDepartamentoCommand;
+import Presentacion.comandos.listadecomandos.vistas.empleado.CerrarVistaEmpleadoCommand;
+import Presentacion.comandos.listadecomandos.vistas.empleado.VistaMenuEmpleadoCommand;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -167,11 +174,16 @@ public class CommandFactoryImp extends CommandFactory {
 			case ListaComandosJPA.VISTA_MENU_DEPARTAMENTO:
 				comando = new VistaMenuDepartamentoCommand();
 			break;
-			
 			case ListaComandosJPA.CERRAR_VISTA_DEPARTAMENTO:
 				comando = new CerrarVistaDepartamentoCommand();
 			break;
 			
+			case ListaComandosJPA.VISTA_MENU_EMPLEADO:
+				comando = new VistaMenuEmpleadoCommand();
+			break;
+			case ListaComandosJPA.CERRAR_VISTA_EMPLEADO:
+				comando = new CerrarVistaEmpleadoCommand();
+			break;
 			//NEGOCIO
 			
 			//Departamento
@@ -193,6 +205,21 @@ public class CommandFactoryImp extends CommandFactory {
 			
 			
 			//Empleado
+			case ListaComandosJPA.NEGOCIO_ALTA_EMPLEADO:
+				comando = new AltaEmpleadoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_BAJA_EMPLEADO:
+				comando = new BajaEmpleadoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_MODIFICA_EMPLEADO:
+				comando = new ModificaEmpleadoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_CONSULTA_EMPLEADO:
+				comando = new ConsultaEmpleadoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_LISTA_EMPLEADOS:
+				comando = new ListaEmpleadoCommand();
+			break;
 		}
 		return comando;
 	}

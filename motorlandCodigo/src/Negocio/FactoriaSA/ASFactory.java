@@ -4,7 +4,9 @@ package Negocio.FactoriaSA;
 import Negocio.Alquiler.ASAlquiler;
 import Negocio.Cliente.ASCliente;
 import Negocio.Vehiculo.ASVehiculo;
+import Negocio.concesionario.ASConcesionario;
 import Negocio.departamento.ASDepartamento;
+import Negocio.empleado.ASEmpleado;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -31,4 +33,6 @@ public abstract class ASFactory {
 	//JPA
 	
 	public abstract ASDepartamento createASDepartamento();
+	public abstract ASEmpleado createASEmpleado();
+	public abstract ASConcesionario createASConcesionario();
 }

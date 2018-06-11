@@ -12,10 +12,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import Negocio.departamento.Departamento;
+import javax.persistence.NamedQuery;
+import javax.persistence.NamedQueries;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo_empleado")
 @Entity
+@NamedQueries({ 
+	@NamedQuery(name = "Empleado.findById", query = "SELECT e FROM Empleado e WHERE e.idempleado = :id"),
+		
+	@NamedQuery(name = "Empleado.findByDni", query = "SELECT e FROM Empleado e WHERE e.dni = :dni"),
+	
+	@NamedQuery(name = "Empleado.findAll", query = "SELECT e FROM Empleado e")
+})
 public class Empleado {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer idempleado;
@@ -33,6 +42,29 @@ public class Empleado {
 	@JoinColumn(name="departamento")
 	private Departamento departamento;
 	
+	public Empleado() {
+		
+	}
+	
+	public Empleado(String dni, String nombre, String domicilio, String cuenta, Departamento departamento, boolean activo) {
+		this.dni = dni;
+		this.nombre = nombre;
+		this.domicilio = domicilio;
+		this.cuenta = cuenta;
+		this.departamento = departamento;
+		this.activo = activo;
+	}
+	public Empleado(int id, String dni, String nombre, String domicilio, String cuenta, Departamento departamento,
+			boolean activo) {
+		this.idempleado = id;
+		this.dni = dni;
+		this.nombre = nombre;
+		this.domicilio = domicilio;
+		this.cuenta = cuenta;
+		this.departamento = departamento;
+		this.activo = activo;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

@@ -195,7 +195,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConcesionarioActionPerformed
 
     private void jButtonEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmpleadosActionPerformed
-        JOptionPane.showMessageDialog(null,"En mantenimiento");
+    	Controller.getInstance().run(ListaComandosJPA.VISTA_MENU_EMPLEADO, null);
     }//GEN-LAST:event_jButtonEmpleadosActionPerformed
 
     private void jButtonAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcercaDeActionPerformed

@@ -1,5 +1,6 @@
 package Negocio.empleado;
 
+import Negocio.departamento.Departamento;
 import Negocio.empleado.Empleado;
 import java.io.Serializable;
 import java.util.Date;
@@ -31,6 +32,19 @@ public class EmpleadoTemporal extends Empleado implements Serializable {
 		this.fechaFin = fechaFin; 
 	}
 	
+	public EmpleadoTemporal(String dni, String nombre, String domicilio, String cuenta, Departamento departamento, boolean activo, Date fechaIni, Date fechaFin) {
+		super(dni, nombre, domicilio, cuenta, departamento, activo);
+		this.fechaIni = fechaIni;
+		this.fechaFin = fechaFin;
+	}
+	
+	public EmpleadoTemporal(int id, String dni, String nombre, String domicilio, String cuenta,
+			Departamento departamento, boolean activo, Date fechaI, Date fechaF) {
+		super(id, dni, nombre, domicilio, cuenta, departamento, activo);
+		this.fechaIni = fechaIni;
+		this.fechaFin = fechaFin;
+	}
+
 	public Date getFechaIni() {
 		return fechaIni;
 	}

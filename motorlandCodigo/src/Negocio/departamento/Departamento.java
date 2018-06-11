@@ -124,11 +124,14 @@ public class Departamento {
 			s += "No hay empleados. " + "\n";
 		else {
 			for (Empleado e : empleados) {
-				s += "\t -ID EMPLEADO : " + e.getId() + "\n"
-				+ "\t NOMBRE: " + e.getNombre() + "\n"
-				+ "\t DNI: " + e.getDni();
+				if(e.isActivo()) {
+					s += "\t -ID EMPLEADO : " + e.getId() + "\n"
+					+ "\t NOMBRE: " + e.getNombre() + "\n"
+					+ "\t DNI: " + e.getDni() + "\n";
+				}
 			}
 		}
+		s += "CONCESIONARIOS:" + "\n";
 		if(concesionariosDepartamentos.isEmpty())
 			s += "No hay concesionarios. " + "\n";
 		else {

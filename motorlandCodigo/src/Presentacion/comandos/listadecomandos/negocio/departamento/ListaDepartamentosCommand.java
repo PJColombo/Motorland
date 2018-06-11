@@ -1,11 +1,10 @@
 package Presentacion.comandos.listadecomandos.negocio.departamento;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Negocio.FactoriaSA.ASFactory;
 import Negocio.departamento.Departamento;
-import Presentacion.comandos.Command;import Presentacion.comandos.listadecomandos.ListaComandos;
+import Presentacion.comandos.Command;
 import Presentacion.comandos.listadecomandos.ListaComandosJPA;
 import Presentacion.controlador.Context;
 

@@ -9,8 +9,12 @@ import Negocio.Cliente.ASCliente;
 import Negocio.Cliente.ASClienteImp;
 import Negocio.Vehiculo.ASVehiculo;
 import Negocio.Vehiculo.ASVehiculoImp;
+import Negocio.concesionario.ASConcesionario;
+import Negocio.concesionario.ASConcesionarioImp;
 import Negocio.departamento.ASDepartamento;
 import Negocio.departamento.ASDepartamentoImp;
+import Negocio.empleado.ASEmpleado;
+import Negocio.empleado.ASEmpleadoImp;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -44,5 +48,15 @@ public class ASFactoryImp extends ASFactory {
 	@Override
 	public ASDepartamento createASDepartamento() {
 		return new ASDepartamentoImp();
+	}
+
+	@Override
+	public ASEmpleado createASEmpleado() {
+		return new ASEmpleadoImp();
+	}
+
+	@Override
+	public ASConcesionario createASConcesionario() {
+		return new ASConcesionarioImp();
 	}
 }

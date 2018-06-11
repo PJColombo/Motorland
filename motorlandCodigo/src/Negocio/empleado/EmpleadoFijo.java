@@ -1,5 +1,6 @@
 package Negocio.empleado;
 
+import Negocio.departamento.Departamento;
 import Negocio.empleado.Empleado;
 import java.io.Serializable;
 import javax.persistence.*;
@@ -21,9 +22,18 @@ public class EmpleadoFijo extends Empleado implements Serializable {
 		super();
 	}
    
-	public EmpleadoFijo(int antiguedad) {
+	
+	public EmpleadoFijo(String dni, String nombre, String domicilio, String cuenta, Departamento departamento, boolean activo, int antiguedad) {
+		super(dni, nombre, domicilio, cuenta, departamento, activo);
 		this.antiguedad = antiguedad;
 	}
+
+	public EmpleadoFijo(int id, String dni, String nombre, String domicilio, String cuenta, Departamento departamento,
+			boolean activo, int antiguedad) {
+		super(id, dni, nombre, domicilio, cuenta, departamento, activo);
+		this.antiguedad = antiguedad;
+	}
+
 
 	public int getAntiguedad() {
 		return antiguedad;

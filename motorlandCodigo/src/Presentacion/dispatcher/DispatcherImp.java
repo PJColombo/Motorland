@@ -11,6 +11,7 @@ import Presentacion.vistas.vistaAlquiler.VistaMenuAlquiler;
 import Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente.VistaMenuAlquilerEmergente;
 import Presentacion.vistas.vistaCliente.VistaMenuClientes;
 import Presentacion.vistas.vistaDepartamento.VistaDepartamento;
+import Presentacion.vistas.vistaEmpleado.VistaEmpleado;
 import Presentacion.vistas.vistaPrincipal.VistaPrincipal;
 import Presentacion.vistas.vistaVehiculo.VistaMenuVehiculo;
 
@@ -130,6 +131,16 @@ public class DispatcherImp extends Dispatcher {
 				VistaPrincipal.getInstance().update(context);
 			break;
 			
+			case ListaComandosJPA.VISTA_MENU_EMPLEADO:
+				VistaPrincipal.getInstance().update(context);
+				VistaEmpleado.getInstance().update(context);
+			break;
+			case ListaComandosJPA.CERRAR_VISTA_EMPLEADO:
+				VistaEmpleado.getInstance().update(context);
+				VistaPrincipal.getInstance().update(context);
+			break;
+			
+			
 			
 			case ListaComandosJPA.MOSTRAR_ALTA_DEPARTAMENTO:
 				VistaDepartamento.getInstance().update(context);
@@ -145,6 +156,23 @@ public class DispatcherImp extends Dispatcher {
 			break;
 			case ListaComandosJPA.MOSTRAR_LISTA_DEPARTAMENTOS:
 				VistaDepartamento.getInstance().update(context);
+			break;
+			
+			
+			case ListaComandosJPA.MOSTRAR_ALTA_EMPLEADO:
+				VistaEmpleado.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_BAJA_EMPLEADO:
+				VistaEmpleado.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_MODIFICA_EMPLEADO:
+				VistaEmpleado.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_CONSULTA_EMPLEADO:
+				VistaEmpleado.getInstance().update(context);
+			break;
+			case ListaComandosJPA.MOSTRAR_LISTA_EMPLEADOS:
+				VistaEmpleado.getInstance().update(context);
 			break;
 		}
 	}
