@@ -27,16 +27,16 @@ public class ConcesionarioDepartamento implements Serializable {
 	@JoinColumn(name="iddepartamento")
 	private Departamento departamento;
 	
-	private Double presupuesto; 
+	private double presupuesto; 
 	
 	@Version
-	private Integer version;
+	private int version;
 	
 	public ConcesionarioDepartamento() {
 		super();
 	}
 	
-	public ConcesionarioDepartamento(Concesionario concesionario, Departamento departamento) {
+	public ConcesionarioDepartamento(Concesionario concesionario, Departamento departamento, double presupuesto) {
 		this.concesionario = concesionario; 
 		this.departamento = departamento;
 	}
@@ -64,6 +64,16 @@ public class ConcesionarioDepartamento implements Serializable {
 	public void setPresupuesto(Double presupuesto) {
 		this.presupuesto = presupuesto;
 	}
+
+	@Override
+	public String toString() {
+		String s = "";
+		
+		s += "\t \t ID DEPARTAMENTO: " + concesionarioDepartamentoID.getDepartamentoID() + "\n" +
+		"\t \t PRESUPUESTO: " + presupuesto + "\n";
+		return s;
+	}
+	
 	
 	
 }

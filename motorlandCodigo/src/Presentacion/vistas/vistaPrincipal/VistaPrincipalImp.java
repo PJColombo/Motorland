@@ -57,7 +57,8 @@ public class VistaPrincipalImp extends VistaPrincipal {
 			vPrincipal.setVisible(true);
 		}
 		else if(contexto.getEvent() == ListaComandosJPA.VISTA_MENU_DEPARTAMENTO ||
-				contexto.getEvent() == ListaComandosJPA.VISTA_MENU_EMPLEADO) {
+				contexto.getEvent() == ListaComandosJPA.VISTA_MENU_EMPLEADO || 
+				contexto.getEvent() == ListaComandosJPA.VISTA_MENU_CONCESIONARIO) {
 			vPrincipal.setVisible(false);
 		}
 		

@@ -24,6 +24,14 @@ import Presentacion.comandos.listadecomandos.negocio.Vehiculo.BuscarVehiculoComm
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ComprobarAutonomiaCommand;
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ListarVehiculoCommand;
 import Presentacion.comandos.listadecomandos.negocio.Vehiculo.ModificarVehiculoCommand;
+import Presentacion.comandos.listadecomandos.negocio.concesionario.AgregaConcesionarioDepartamentoCommand;
+import Presentacion.comandos.listadecomandos.negocio.concesionario.AltaConcesionarioCommand;
+import Presentacion.comandos.listadecomandos.negocio.concesionario.BajaConcesionarioCommand;
+import Presentacion.comandos.listadecomandos.negocio.concesionario.CalculaPresupuestoCommand;
+import Presentacion.comandos.listadecomandos.negocio.concesionario.ConsultaConcesionarioCommand;
+import Presentacion.comandos.listadecomandos.negocio.concesionario.EliminaConcesionarioDepartamentoCommand;
+import Presentacion.comandos.listadecomandos.negocio.concesionario.ListaConcesionariosCommand;
+import Presentacion.comandos.listadecomandos.negocio.concesionario.ModificaConcesionarioCommand;
 import Presentacion.comandos.listadecomandos.negocio.departamento.AltaDepartamentoCommand;
 import Presentacion.comandos.listadecomandos.negocio.departamento.BajaDepartamentoCommand;
 import Presentacion.comandos.listadecomandos.negocio.departamento.ConsultaDepartamentoCommand;
@@ -47,6 +55,8 @@ import Presentacion.comandos.listadecomandos.vistas.VistaMenuClienteCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuModificarAlquilerEmergente;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuPrincipalCommand;
 import Presentacion.comandos.listadecomandos.vistas.VistaMenuVehiculoCommand;
+import Presentacion.comandos.listadecomandos.vistas.concesionario.CerrarVistaConcesionarioCommand;
+import Presentacion.comandos.listadecomandos.vistas.concesionario.VistaMenuConcesionarioCommand;
 import Presentacion.comandos.listadecomandos.vistas.departamento.CerrarVistaDepartamentoCommand;
 import Presentacion.comandos.listadecomandos.vistas.departamento.VistaMenuDepartamentoCommand;
 import Presentacion.comandos.listadecomandos.vistas.empleado.CerrarVistaEmpleadoCommand;
@@ -184,6 +194,13 @@ public class CommandFactoryImp extends CommandFactory {
 			case ListaComandosJPA.CERRAR_VISTA_EMPLEADO:
 				comando = new CerrarVistaEmpleadoCommand();
 			break;
+			
+			case ListaComandosJPA.VISTA_MENU_CONCESIONARIO:
+				comando = new VistaMenuConcesionarioCommand();
+			break;
+			case ListaComandosJPA.CERRAR_VISTA_CONCESIONARIO:
+				comando = new CerrarVistaConcesionarioCommand();
+			break;
 			//NEGOCIO
 			
 			//Departamento
@@ -220,7 +237,34 @@ public class CommandFactoryImp extends CommandFactory {
 			case ListaComandosJPA.NEGOCIO_LISTA_EMPLEADOS:
 				comando = new ListaEmpleadoCommand();
 			break;
+		
+			//Concesionario
+			case ListaComandosJPA.NEGOCIO_ALTA_CONCESIONARIO:
+				comando = new AltaConcesionarioCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_BAJA_CONCESIONARIO:
+				comando = new BajaConcesionarioCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_MODIFICA_CONCESIONARIO:
+				comando = new ModificaConcesionarioCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_CONSULTA_CONCESIONARIO:
+				comando = new ConsultaConcesionarioCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_LISTA_CONCESIONARIOS:
+				comando = new ListaConcesionariosCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_AGREGA_CONCESIONARIODEPARTAMENTO_CONCONCESIONARIO:
+				comando = new AgregaConcesionarioDepartamentoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_ELIMINA_CONCESIONARIODEPARTAMENTO_CONCESIONARIO:
+				comando = new EliminaConcesionarioDepartamentoCommand();
+			break;
+			case ListaComandosJPA.NEGOCIO_CALCULA_PRESUPUESTO_CONCESIONARIO:
+				comando = new CalculaPresupuestoCommand();
+			break;
 		}
+		
 		return comando;
 	}
 }

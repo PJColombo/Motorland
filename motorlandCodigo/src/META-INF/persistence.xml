@@ -17,5 +17,6 @@
 			<property name="javax.persistence.jdbc.user" value="motorlanddb"/>
 			<property name="javax.persistence.jdbc.password" value="123-abc"/>
 		</properties>
+		
 	</persistence-unit>
 </persistence>

@@ -35,7 +35,7 @@ public class Vehiculo extends JFrame {
      * Creates new form Vehiculo
      */
     public Vehiculo() {
-    	//this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/MotorLand.png")).getImage());
+    	this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/MotorLand.png")).getImage());
     	this.setTitle("Menú vehículos");
         initComponents();
         jTextAreaList.setEnabled(false);

@@ -151,52 +151,31 @@ public class DispatcherImp extends Dispatcher {
 			break;
 			
 			case ListaComandosJPA.MOSTRAR_ALTA_DEPARTAMENTO:
-				VistaDepartamento.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_BAJA_DEPARTAMENTO:
-				VistaDepartamento.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_MODIFICA_DEPARTAMENTO:
-				VistaDepartamento.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_CONSULTA_DEPARTAMENTO:
-				VistaDepartamento.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_LISTA_DEPARTAMENTOS:
 				VistaDepartamento.getInstance().update(context);
 			break;
 			
 			
 			case ListaComandosJPA.MOSTRAR_ALTA_EMPLEADO:
-				VistaEmpleado.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_BAJA_EMPLEADO:
-				VistaEmpleado.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_MODIFICA_EMPLEADO:
-				VistaEmpleado.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_CONSULTA_EMPLEADO:
-				VistaEmpleado.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_LISTA_EMPLEADOS:
 				VistaEmpleado.getInstance().update(context);
 			break;
 			
 			
 			case ListaComandosJPA.MOSTRAR_ALTA_CONCESIONARIO:
-				VistaConcesionario.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_BAJA_CONCESIONARIO:
-				VistaConcesionario.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_MODIFICA_CONCESIONARIO:
-				VistaConcesionario.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_CONSULTA_CONCESIONARIO:
-				VistaConcesionario.getInstance().update(context);
-			break;
 			case ListaComandosJPA.MOSTRAR_LISTA_CONCESIONARIOS:
+			case ListaComandosJPA.MOSTRAR_AGREGA_CONCESIONARIODEPARTAMENTO_CONCESIONARIO:
+			case ListaComandosJPA.MOSTRAR_ELIMINA_CONCESIONARIODEPARTAMENTO_CONCESIONARIO:
+			case ListaComandosJPA.MOSTRAR_CALCULA_PRESUPUESTO_CONCESIONARIO:
 				VistaConcesionario.getInstance().update(context);
 			break;
 		}

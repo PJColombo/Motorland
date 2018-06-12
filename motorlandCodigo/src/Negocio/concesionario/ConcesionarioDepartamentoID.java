@@ -49,6 +49,22 @@ public class ConcesionarioDepartamentoID implements Serializable {
 		return true;
 	}
 
+	public int getConcesionarioID() {
+		return concesionarioID;
+	}
+
+	public void setConcesionarioID(int concesionarioID) {
+		this.concesionarioID = concesionarioID;
+	}
+
+	public int getDepartamentoID() {
+		return departamentoID;
+	}
+
+	public void setDepartamentoID(int departamentoID) {
+		this.departamentoID = departamentoID;
+	}
+
 	
 	
 	
