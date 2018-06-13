@@ -70,8 +70,8 @@ public class ConcesionarioDepartamento implements Serializable {
 	public String toString() {
 		String s = "";
 		
-		s += "\t \t ID DEPARTAMENTO: " + concesionarioDepartamentoID.getDepartamentoID() + "\n" +
-		"\t \t PRESUPUESTO: " + presupuesto + "\n";
+		s += "ID DEPARTAMENTO: " + concesionarioDepartamentoID.getDepartamentoID() + "\n" +
+		"\tPRESUPUESTO: " + presupuesto + "\n";
 		return s;
 	}
 	

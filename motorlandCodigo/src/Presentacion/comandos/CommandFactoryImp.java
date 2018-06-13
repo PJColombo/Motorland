@@ -42,25 +42,25 @@ import Presentacion.comandos.listadecomandos.negocio.empleado.BajaEmpleadoComman
 import Presentacion.comandos.listadecomandos.negocio.empleado.ConsultaEmpleadoCommand;
 import Presentacion.comandos.listadecomandos.negocio.empleado.ListaEmpleadoCommand;
 import Presentacion.comandos.listadecomandos.negocio.empleado.ModificaEmpleadoCommand;
-import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerCommand;
-import Presentacion.comandos.listadecomandos.vistas.CerrarVistaAlquilerEmergenteCommand;
-import Presentacion.comandos.listadecomandos.vistas.CerrarVistaClienteCommand;
-import Presentacion.comandos.listadecomandos.vistas.CerrarVistaPrincipalCommand;
-import Presentacion.comandos.listadecomandos.vistas.CerrarVistaVehiculoCommand;
-import Presentacion.comandos.listadecomandos.vistas.PreparaVistaMenuAltaAlquilerEmergenteCommand;
-import Presentacion.comandos.listadecomandos.vistas.VistaMenuAcercaDeCommand;
-import Presentacion.comandos.listadecomandos.vistas.VistaMenuAlquilerCommand;
-import Presentacion.comandos.listadecomandos.vistas.VistaMenuAltaAlquilerEmergenteCommand;
-import Presentacion.comandos.listadecomandos.vistas.VistaMenuClienteCommand;
-import Presentacion.comandos.listadecomandos.vistas.VistaMenuModificarAlquilerEmergente;
-import Presentacion.comandos.listadecomandos.vistas.VistaMenuPrincipalCommand;
-import Presentacion.comandos.listadecomandos.vistas.VistaMenuVehiculoCommand;
+import Presentacion.comandos.listadecomandos.vistas.acercaDe.VistaMenuAcercaDeCommand;
+import Presentacion.comandos.listadecomandos.vistas.alquiler.CerrarVistaAlquilerCommand;
+import Presentacion.comandos.listadecomandos.vistas.alquiler.VistaMenuAlquilerCommand;
+import Presentacion.comandos.listadecomandos.vistas.alquiler.alquilerEmergente.CerrarVistaAlquilerEmergenteCommand;
+import Presentacion.comandos.listadecomandos.vistas.alquiler.alquilerEmergente.PreparaVistaMenuAltaAlquilerEmergenteCommand;
+import Presentacion.comandos.listadecomandos.vistas.alquiler.alquilerEmergente.VistaMenuAltaAlquilerEmergenteCommand;
+import Presentacion.comandos.listadecomandos.vistas.alquiler.alquilerEmergente.VistaMenuModificarAlquilerEmergente;
+import Presentacion.comandos.listadecomandos.vistas.cliente.CerrarVistaClienteCommand;
+import Presentacion.comandos.listadecomandos.vistas.cliente.VistaMenuClienteCommand;
 import Presentacion.comandos.listadecomandos.vistas.concesionario.CerrarVistaConcesionarioCommand;
 import Presentacion.comandos.listadecomandos.vistas.concesionario.VistaMenuConcesionarioCommand;
 import Presentacion.comandos.listadecomandos.vistas.departamento.CerrarVistaDepartamentoCommand;
 import Presentacion.comandos.listadecomandos.vistas.departamento.VistaMenuDepartamentoCommand;
 import Presentacion.comandos.listadecomandos.vistas.empleado.CerrarVistaEmpleadoCommand;
 import Presentacion.comandos.listadecomandos.vistas.empleado.VistaMenuEmpleadoCommand;
+import Presentacion.comandos.listadecomandos.vistas.principal.CerrarVistaPrincipalCommand;
+import Presentacion.comandos.listadecomandos.vistas.principal.VistaMenuPrincipalCommand;
+import Presentacion.comandos.listadecomandos.vistas.vehiculo.CerrarVistaVehiculoCommand;
+import Presentacion.comandos.listadecomandos.vistas.vehiculo.VistaMenuVehiculoCommand;
 
 /** 
  * <!-- begin-UML-doc -->

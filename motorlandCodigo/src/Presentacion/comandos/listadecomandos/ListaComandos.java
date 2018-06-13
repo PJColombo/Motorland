@@ -272,5 +272,7 @@ public class ListaComandos {
 	
 	public static final int CERRAR_VISTA_PRINCIPAL = 210; 
 	
-	// COMANDO 212
+	public static final int CERRAR_VISTA_ACERCADE = 213;
+	
+	// COMANDO 214
 }

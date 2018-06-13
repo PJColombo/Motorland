@@ -1,4 +1,4 @@
-package Presentacion.comandos.listadecomandos.vistas;
+package Presentacion.comandos.listadecomandos.vistas.principal;
 
 import java.sql.SQLException;
 

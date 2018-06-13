@@ -49,6 +49,8 @@ public class ASConcesionarioImp implements ASConcesionario {
 					con.setNombre(c.getNombre());
 					con.setDireccion(c.getDireccion());
 					con.setActivo(true);
+					res = 1;
+					tr.commit();
 				}
 				//Concesionario ya existe y está activo.
 				else {

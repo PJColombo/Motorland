@@ -109,8 +109,7 @@ public class ASEmpleadoImp implements ASEmpleado {
 		EntityManagerFactory emf = null;
 		EntityManager em = null; 
 		EntityTransaction tr = null;
-		List<Empleado> eLeido = null;
-		Query q; 
+		Empleado eLeido = null;
 		
 		try {
 			emf = Persistence.createEntityManagerFactory("Motorland");
@@ -119,18 +118,14 @@ public class ASEmpleadoImp implements ASEmpleado {
 			
 			tr.begin();
 			
-			q = em.createNamedQuery("Empleado.findById");
-			q.setParameter("id", id);
+			eLeido = em.find(Empleado.class, id);
 			
-			eLeido = q.getResultList();
-			
-			if(!eLeido.isEmpty()) {
-				if(eLeido.get(0).isActivo()) {
-					Empleado emp = eLeido.get(0);
+			if(eLeido != null) {
+				if(eLeido.isActivo()) {
 					//no funciona.
-					emp.getDepartamento().eliminaEmpleado(emp);
+					eLeido.getDepartamento().eliminaEmpleado(eLeido);
 					
-					emp.setActivo(false);
+					eLeido.setActivo(false);
 					
 					res = 1;
 					tr.commit();
@@ -299,12 +294,10 @@ public class ASEmpleadoImp implements ASEmpleado {
 
 	@Override
 	public Empleado consultaEmpleado(int id) {
-		Empleado e = null;
 		EntityManagerFactory emf = null;
 		EntityManager em = null; 
 		EntityTransaction tr = null;
-		List<Empleado> eLeido = null;
-		Query q;
+		Empleado eLeido = null;
 		
 		try {
 			emf = Persistence.createEntityManagerFactory("Motorland");
@@ -313,17 +306,9 @@ public class ASEmpleadoImp implements ASEmpleado {
 			
 			tr.begin();
 			
-			q = em.createNamedQuery("Empleado.findById");
-			q.setParameter("id", id);
-			eLeido = q.getResultList();
+			eLeido = em.find(Empleado.class, id);
 			
-			if(!eLeido.isEmpty()) {
-				e = eLeido.get(0);
-				tr.commit();
-			}
-			else
-				tr.rollback();
-
+			tr.commit();
 		}
 		finally {
 			if(emf != null && emf.isOpen())
@@ -331,7 +316,7 @@ public class ASEmpleadoImp implements ASEmpleado {
 			if(em != null && em.isOpen())
 				em.close();
 		}
-		return e;
+		return eLeido;
 	}
 
 	@Override

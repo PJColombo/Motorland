@@ -1,4 +1,4 @@
-package Presentacion.comandos.listadecomandos.vistas;
+package Presentacion.comandos.listadecomandos.vistas.alquiler;
 
 import Presentacion.comandos.Command;
 import Presentacion.comandos.listadecomandos.ListaComandos;

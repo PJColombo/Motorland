@@ -1,15 +1,15 @@
-package Presentacion.comandos.listadecomandos.vistas;
+package Presentacion.comandos.listadecomandos.vistas.acercaDe;
 
 import Presentacion.comandos.Command;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
 
-public class CerrarVistaAlquilerEmergenteCommand implements Command {
+public class VistaMenuAcercaDeCommand implements Command{
 
 	@Override
 	public Context execute(Object data) {
 		// TODO Auto-generated method stub
-		return new Context(ListaComandos.CERRAR_VISTA_ALQUILER_EMERGENTE, null);
+		return new Context(ListaComandos.VISTAACERCADE, data);
 	}
 
 }

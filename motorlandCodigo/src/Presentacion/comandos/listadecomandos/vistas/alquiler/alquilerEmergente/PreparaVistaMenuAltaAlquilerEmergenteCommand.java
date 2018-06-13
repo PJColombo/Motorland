@@ -1,4 +1,4 @@
-package Presentacion.comandos.listadecomandos.vistas;
+package Presentacion.comandos.listadecomandos.vistas.alquiler.alquilerEmergente;
 
 
 import Presentacion.comandos.Command;

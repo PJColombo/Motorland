@@ -1,4 +1,4 @@
-package Presentacion.comandos.listadecomandos.vistas;
+package Presentacion.comandos.listadecomandos.vistas.vehiculo;
 
 import Presentacion.comandos.Command;
 import Presentacion.controlador.Context;

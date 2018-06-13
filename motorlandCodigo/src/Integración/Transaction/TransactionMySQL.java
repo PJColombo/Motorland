@@ -17,8 +17,7 @@ public class TransactionMySQL implements Transaction {
 			connection = (Connection) ConnectionPoolFactory.getInstance().getConnection(); 
 			this.connection.setAutoCommit(false);
 		} catch (SQLException e) {
-			throw e;
-			//throw new Exception("Error establecer auto commit a falso");
+			throw new Exception("Error al obtener una conexión del pool de conexiones.");
 		}
 	}
 
