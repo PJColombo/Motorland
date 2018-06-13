@@ -8,11 +8,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Map;
 
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
@@ -20,10 +17,8 @@ import Integración.connectionPool.ConnectionPoolFactory;
 import Negocio.Alquiler.TAlquiler;
 import Negocio.Alquiler.TLineaAlquiler;
 import Negocio.Alquiler.enumeradosAlq.Operacion;
-import Negocio.Cliente.TCliente;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.vistas.vistaCalendario.DateLabelFormatter;
-import oracle.net.nt.NTAdapter.NetworkAdapterType;
 
 
 public class DAOAlquilerImp implements DAOAlquiler {
@@ -167,6 +162,7 @@ public class DAOAlquilerImp implements DAOAlquiler {
 		return l;
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public TAlquiler read(int id) throws Exception {
 		Transaction tr = null;

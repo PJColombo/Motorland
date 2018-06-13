@@ -17,7 +17,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 
-import Negocio.Cliente.TCliente;
 import Negocio.Vehiculo.TCoche;
 import Negocio.Vehiculo.TMoto;
 import Negocio.Vehiculo.TVehiculo;

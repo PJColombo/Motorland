@@ -5,7 +5,6 @@ package Presentacion.comandos.listadecomandos.negocio.Vehiculo;
 
 import java.util.ArrayList;
 
-import Negocio.Cliente.TCliente;
 import Negocio.FactoriaSA.ASFactory;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.Command;

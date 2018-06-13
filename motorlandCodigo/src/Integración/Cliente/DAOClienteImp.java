@@ -4,7 +4,6 @@
 package Integración.Cliente;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +14,6 @@ import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
 import Integración.connectionPool.ConnectionPoolFactory;
 import Negocio.Cliente.TCliente;
-import oracle.jdbc.replay.driver.PooledConnectionImpl;
 
 /** 
  * <!-- begin-UML-doc -->

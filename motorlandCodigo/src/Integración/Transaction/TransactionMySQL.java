@@ -4,7 +4,6 @@
 package Integración.Transaction;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import Integración.connectionPool.ConnectionPoolFactory;

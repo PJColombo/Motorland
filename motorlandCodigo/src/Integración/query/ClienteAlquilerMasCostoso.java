@@ -4,21 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import Integración.Alquiler.DAOAlquiler;
-import Integración.DAOFactory.DaoFactory;
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
 import Negocio.Cliente.TCliente;
 
 public class ClienteAlquilerMasCostoso implements Query {
 
+	@SuppressWarnings("resource")
 	@Override
 	public Object execute(Object data) throws Exception {
 		Transaction tr = null; 
 		Connection cn = null; 
 		PreparedStatement ps = null;
 		ResultSet rs = null; 
-		DAOAlquiler daoA = DaoFactory.getInstance().createDAOAlquiler();
 		String forUpdate = " FOR UPDATE";
 		TCliente c = null; 
 		int idClienteVIP; 

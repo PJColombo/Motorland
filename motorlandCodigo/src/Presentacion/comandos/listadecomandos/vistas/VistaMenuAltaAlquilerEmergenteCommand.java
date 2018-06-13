@@ -3,7 +3,6 @@ package Presentacion.comandos.listadecomandos.vistas;
 import java.util.ArrayList;
 
 import Negocio.Alquiler.TAlquiler;
-import Negocio.Cliente.TCliente;
 import Negocio.FactoriaSA.ASFactory;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.Command;

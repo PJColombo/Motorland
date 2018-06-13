@@ -7,12 +7,9 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import Negocio.Cliente.TCliente;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
-import Presentacion.vistas.vistaCliente.Clientes;
-import Presentacion.vistas.vistaCliente.VistaMenuClientesImp;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -81,7 +78,7 @@ public class VistaMenuVehiculoImp extends VistaMenuVehiculo {
 			
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARLISTAVEHICULO){
-			StringBuilder mensajeLista = new StringBuilder();
+			@SuppressWarnings("unchecked")
 			ArrayList<TVehiculo> lista = ((ArrayList<TVehiculo>) contexto.getData());
 			if (lista.size() > 0){
 				String suma  = "";

@@ -3,7 +3,6 @@
  */
 package Negocio.Alquiler;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Negocio.Vehiculo.TVehiculo;

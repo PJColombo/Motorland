@@ -1,6 +1,5 @@
 package Integración.Cliente;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import Negocio.Cliente.TCliente;

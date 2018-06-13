@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import Negocio.Alquiler.TAlquiler;
-import Negocio.Alquiler.TLineaAlquiler;
-import Negocio.Cliente.TCliente;
 import Negocio.Vehiculo.TVehiculo;
 
 

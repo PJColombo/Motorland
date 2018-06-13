@@ -3,7 +3,6 @@
  */
 package Presentacion.comandos.listadecomandos.negocio.Vehiculo;
 
-import Negocio.Cliente.TCliente;
 import Negocio.FactoriaSA.ASFactory;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.Command;

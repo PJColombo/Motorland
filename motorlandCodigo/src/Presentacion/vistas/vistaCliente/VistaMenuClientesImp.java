@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import com.sun.codemodel.JOp;
 
 import Negocio.Cliente.TCliente;
 import Presentacion.comandos.listadecomandos.ListaComandos;
@@ -115,7 +114,6 @@ public class VistaMenuClientesImp extends VistaMenuClientes {
 			
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARLISTACLIENTE){
-			StringBuilder mensajeLista = new StringBuilder();
 			ArrayList<TCliente> lista = ((ArrayList<TCliente>) contexto.getData());
 			TCliente[] listaConFormato = new TCliente[lista.size()];
 			

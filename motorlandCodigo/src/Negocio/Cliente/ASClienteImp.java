@@ -3,7 +3,6 @@
  */
 package Negocio.Cliente;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 

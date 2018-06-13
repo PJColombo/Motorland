@@ -6,16 +6,13 @@ package Presentacion.vistas.vistaAlquiler.vistaAlquilerEmergente;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 import Negocio.Alquiler.TAlquiler;
 import Negocio.Alquiler.enumeradosAlq.Accion;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
-import Presentacion.vistas.vistaCliente.VistaMenuClientes;
-import Presentacion.vistas.vistaVehiculo.Vehiculo;
-import Presentacion.vistas.vistaVehiculo.VistaMenuVehiculoImp;
+
 
 public class VistaMenuAlquilerEmergenteImp extends VistaMenuAlquilerEmergente{
 	/** 

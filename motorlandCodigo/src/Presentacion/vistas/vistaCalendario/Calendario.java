@@ -5,16 +5,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 
-@SuppressWarnings("serial")
 public class Calendario{
 	
 	private JDatePickerImpl cal; 

@@ -39,6 +39,7 @@ public class ConcesionarioDepartamento implements Serializable {
 	public ConcesionarioDepartamento(Concesionario concesionario, Departamento departamento, double presupuesto) {
 		this.concesionario = concesionario; 
 		this.departamento = departamento;
+		this.presupuesto = presupuesto;
 	}
 
 	public Concesionario getConcesionario() {

@@ -3,7 +3,6 @@
  */
 package Integración.Transaction;
 
-import java.sql.SQLException;
 
 public interface Transaction { 
 	

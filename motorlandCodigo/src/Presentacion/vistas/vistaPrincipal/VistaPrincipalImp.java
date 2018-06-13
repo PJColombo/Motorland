@@ -4,7 +4,6 @@
 package Presentacion.vistas.vistaPrincipal;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.comandos.listadecomandos.ListaComandosJPA;

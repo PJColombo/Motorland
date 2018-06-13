@@ -2,7 +2,6 @@ package Presentacion.comandos.listadecomandos.vistas;
 
 import java.sql.SQLException;
 
-import javax.sql.PooledConnection;
 
 import Integración.connectionPool.ConnectionPoolFactory;
 import Presentacion.comandos.Command;

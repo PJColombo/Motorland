@@ -4,8 +4,6 @@
 package Presentacion.comandos.listadecomandos.negocio.Vehiculo;
 
 import Negocio.FactoriaSA.ASFactory;
-import Negocio.Vehiculo.ASVehiculoImp;
-import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.Command;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;

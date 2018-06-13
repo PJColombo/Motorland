@@ -1,6 +1,5 @@
 package Presentacion.vistas.vistaDepartamento;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -95,6 +94,7 @@ public class VistaDepartamentoImp extends VistaDepartamento {
 			
 		}
 		else if(contexto.getEvent() == ListaComandosJPA.MOSTRAR_LISTA_DEPARTAMENTOS) {
+			@SuppressWarnings("unchecked")
 			List<Departamento> l = (List<Departamento>) contexto.getData();
 			
 			if(l != null) {

@@ -3,7 +3,6 @@
  */
 package Integración.Vehiculo;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import Negocio.Vehiculo.TVehiculo;
