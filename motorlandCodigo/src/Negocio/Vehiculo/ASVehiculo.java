@@ -5,6 +5,8 @@ package Negocio.Vehiculo;
 
 import java.util.ArrayList;
 
+import Integración.query.VIPResultado;
+
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -25,6 +27,6 @@ public interface ASVehiculo {
 
 	public int comprobarAutonomia(int t) throws Exception;
 	
-	public TVehiculo vehiculoMasAlquilado(); 
+	public VIPResultado vehiculoMasAlquilado(); 
 	
 }

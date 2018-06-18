@@ -77,11 +77,15 @@ public class TVehiculo {
     }
 	@Override
 	public String toString() {
-		String s; 
-		s = modelo +
-		", " + color +
-		", " +numBaterias + " baterias" +
-		", " + coste + "€\n"; 
+		String s = ""; 
+		s += "ID VEHÍCULO: " + id + "\n" +
+			"MATRÍCULA: " + matricula + "\n" +
+			"MODELO: " + modelo + "\n" +
+			"COLOR: " + color + "\n" +
+			"NÚM. BATERÍAS: " + numBaterias + "\n" +
+			"COSTE: " + coste + "€ \n" +
+			"ESTADO: ";
+		s += (activo) ? "ACTIVO" : "INACTIVO";
 		
 		return s; 
 	}

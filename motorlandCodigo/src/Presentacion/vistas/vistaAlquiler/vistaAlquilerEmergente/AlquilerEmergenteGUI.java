@@ -357,6 +357,10 @@ public class AlquilerEmergenteGUI extends javax.swing.JFrame {
     	if (vAgregadosModel.isEmpty())
     		JOptionPane.showMessageDialog(this, "No hay vehículos para eliminar.",
     				"Error al eliminar", JOptionPane.ERROR_MESSAGE);
+    	else if(tipoAccion == Accion.MODIFICACION && vAgregadosModel.size() == 1) {
+    		JOptionPane.showMessageDialog(this, "El alquiler debe tener al menos un vehiculo",
+    				"Error al eliminar", JOptionPane.ERROR_MESSAGE);
+    	}
     	else if (indiceSel > - 1) {
     		tSel = vAgregadosList.getSelectedValue();
     		vDisponiblesModel.addElement(tSel);
@@ -376,9 +380,6 @@ public class AlquilerEmergenteGUI extends javax.swing.JFrame {
 	    	}
 	    		
 	    	resta = CalculadorPrecios.redondeaPrecio((importeAct - tSel.getCoste()));
-	    	
-	    	System.out.println(tSel.getModelo() +  " " + tSel.getCoste());
-	    	System.out.println("actual : " + importeAct + " - " + tSel.getCoste());
 	    	
 	    	
 	    	importeTF.setText("" + resta);
@@ -434,10 +435,7 @@ public class AlquilerEmergenteGUI extends javax.swing.JFrame {
 			}
     		
     		Controller.getInstance().run(ListaComandos.NEGOCIOMODIFICARALQUILER, tAlquiler);
-    	}
-    	
-    	System.out.println(precioTotal);
-    	
+    	}    	
     	
     		
     }                                             

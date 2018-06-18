@@ -1,7 +1,4 @@
-/**
- * 
- */
-package Integración.queryFactory;
+package Presentacion.comandos;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,29 +8,23 @@ import java.util.Properties;
 
 import Integración.query.Query;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author Paulo Colombo
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
-public class QueryFactoryImpDinamica extends QueryFactory {
+public class CommandFactoryCargaDinamicaImp extends CommandFactory {
 
 	@Override
-	public Query newQuery(String query) {
+	public Command getCommand(int event) {
 		FileInputStream fis;
 		Properties propQueries = new Properties();
 		String className; 
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		Query q = null; 
+		Command command = null;
 		try {
-			fis = new FileInputStream(new File("config/queries.properties"));
+			fis = new FileInputStream(new File("config/comandos.properties"));
 			propQueries.load(fis);
-			className = propQueries.getProperty(query);
+			className = propQueries.getProperty("" + event);
 			if(className != null) {
 				Class<?> c = loader.loadClass(className);
 				Class.forName(className);
-				q = (Query) c.newInstance();
+				command = (Command) c.newInstance();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -51,6 +42,7 @@ public class QueryFactoryImpDinamica extends QueryFactory {
 			e.printStackTrace();
 		}
 		
-		return q;
+		return command;
 	}
+
 }

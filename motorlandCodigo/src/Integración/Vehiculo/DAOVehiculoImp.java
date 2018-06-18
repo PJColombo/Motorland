@@ -22,6 +22,7 @@ import Negocio.Vehiculo.TCoche;
 
 public class DAOVehiculoImp implements DAOVehiculo {
 
+	@SuppressWarnings("resource")
 	@Override
 	public int create(TVehiculo t) throws Exception {
 		int res = 0; 
@@ -62,6 +63,7 @@ public class DAOVehiculoImp implements DAOVehiculo {
 				rs.close();
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new Exception(); // correcto ? 
 		}
 		finally{
@@ -179,6 +181,7 @@ public class DAOVehiculoImp implements DAOVehiculo {
 	 * @see DAOVehiculo#search(int id)
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
+	@SuppressWarnings("resource")
 	@Override
 	public TVehiculo read(int id) throws Exception {
 		Connection cn = null;
@@ -238,6 +241,7 @@ public class DAOVehiculoImp implements DAOVehiculo {
 	 * @see DAOVehiculo#update(TVehiculo t)
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
+	@SuppressWarnings("resource")
 	@Override
 	public int update(TVehiculo t) throws Exception {
 		Connection cn = null;
@@ -293,6 +297,7 @@ public class DAOVehiculoImp implements DAOVehiculo {
 		return res;
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public TVehiculo readByMatricula(String m) throws Exception {
 		Connection cn = null;

@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-
+import Integración.query.VIPResultado;
+import Negocio.Alquiler.TAlquiler;
 import Negocio.Cliente.TCliente;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
@@ -122,8 +123,14 @@ public class VistaMenuClientesImp extends VistaMenuClientes {
 			
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARCLIENTEVIP){
-			if((TCliente)contexto.getData() != null){
-				vClientes.muestra((TCliente)contexto.getData());
+			ArrayList<VIPResultado> lista = (ArrayList<VIPResultado>) contexto.getData();
+			if(lista != null) {
+				for (VIPResultado vipResultado : lista) {
+					TCliente c = (TCliente) vipResultado.getRes1();
+					vClientes.muestraTexto(c.toString());
+					TAlquiler t = (TAlquiler) vipResultado.getRes2Valor();
+					vClientes.muestraTexto("ID ALQUILER: " + t.getId() + "\n" + "COSTE: " + t.getCosteTotal());
+				}
 			}
 			else{
 				JOptionPane.showMessageDialog(null,"Error al consultar el cliente VI");

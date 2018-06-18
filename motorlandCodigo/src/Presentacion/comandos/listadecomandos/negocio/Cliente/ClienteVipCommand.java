@@ -1,5 +1,8 @@
 package Presentacion.comandos.listadecomandos.negocio.Cliente;
 
+import java.util.List;
+
+import Integración.query.VIPResultado;
 import Negocio.Cliente.TCliente;
 import Negocio.FactoriaSA.ASFactory;
 import Presentacion.comandos.Command;
@@ -11,13 +14,13 @@ public class ClienteVipCommand implements Command {
 	@Override
 	public Context execute(Object data) {
 		// TODO Auto-generated method stub
-		TCliente t;
+		List<VIPResultado> clientes;
 		try {
-			t = ASFactory.getInstance().createSACliente().clienteVip();
+			clientes = ASFactory.getInstance().createSACliente().clienteVip();
 		} catch (Exception e) {
 			return new Context(ListaComandos.MOSTRARCLIENTEVIP, e);
 		}
-		return new Context (ListaComandos.MOSTRARCLIENTEVIP, t);
+		return new Context (ListaComandos.MOSTRARCLIENTEVIP, clientes);
 	}
 
 }

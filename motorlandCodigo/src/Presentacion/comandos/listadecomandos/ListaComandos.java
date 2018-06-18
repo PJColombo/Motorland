@@ -162,6 +162,8 @@ public class ListaComandos {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public  static final int NEGOCIOCOMPROBARAUTONOMIA = 70;
+	
+	public static final int NEGOCIO_VEHICULO_MAS_ALQUILADO = 214;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -262,6 +264,8 @@ public class ListaComandos {
 	public  static final int MOSTRARCOMPROBARAUTONOMIA = 86;
 	
 	public  static final int MOSTRARLISTAVEHICULO = 87;
+	
+	public static final int MOSTRAR_VEHICULO_MAS_ALQUILADO = 215;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -274,5 +278,5 @@ public class ListaComandos {
 	
 	public static final int CERRAR_VISTA_ACERCADE = 213;
 	
-	// COMANDO 214
+	// COMANDO 215
 }

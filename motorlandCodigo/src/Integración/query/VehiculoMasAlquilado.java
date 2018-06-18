@@ -20,20 +20,28 @@ public class VehiculoMasAlquilado implements Query {
 		String forUpdate = " FOR UPDATE";
 		TVehiculo v = null; 
 		int idVIP; 
+		int vecesAlquilado;
+		VIPResultado res = null;
 		try {
 			tr = TransactionManager.getInstance().getTransaction();
 			cn = (Connection) tr.getResource();
-			ps = cn.prepareStatement("SELECT idVehiculo FROM lineaalquiler GROUP BY idVehiculo "
+			ps = cn.prepareStatement("SELECT idVehiculo, COUNT(*) FROM lineaalquiler GROUP BY idVehiculo "
 					+ "ORDER BY COUNT(*) DESC LIMIT 1" + forUpdate);
 			rs = ps.executeQuery();
 			
-			idVIP = rs.getInt(1);
-			
-			ps = cn.prepareStatement("SELECT * FROM vehiculo WHERE idvehiculo = ?" + forUpdate);
-			ps.setInt(1, idVIP);
-			rs = ps.executeQuery();
-			
-			v = new TVehiculo(idVIP, rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), rs.getBoolean(7));
+			if(rs.next()) {
+				idVIP = rs.getInt(1);
+				vecesAlquilado = rs.getInt(2);
+				
+				ps = cn.prepareStatement("SELECT * FROM vehiculo WHERE idvehiculo = ?" + forUpdate);
+				ps.setInt(1, idVIP);
+				rs = ps.executeQuery();
+				
+				rs.next();
+				
+				v = new TVehiculo(idVIP, rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), rs.getBoolean(7));
+				res = new VIPResultado(v, vecesAlquilado);
+			}
 		}
 		finally {
 			if(ps != null)
@@ -41,7 +49,7 @@ public class VehiculoMasAlquilado implements Query {
 			if(rs != null)
 				rs.close();
 		}
-		return v;
+		return res;
 	}
 
 }

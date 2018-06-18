@@ -6,12 +6,12 @@ package Negocio.Vehiculo;
 
 import java.util.ArrayList;
 
-import Integración.Alquiler.DAOAlquiler;
 import Integración.DAOFactory.DaoFactory;
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
 import Integración.Vehiculo.DAOVehiculo;
 import Integración.query.Query;
+import Integración.query.VIPResultado;
 import Integración.queryFactory.QueryFactory;
 
 public class ASVehiculoImp implements ASVehiculo {
@@ -41,8 +41,7 @@ public class ASVehiculoImp implements ASVehiculo {
 					tr.commit();//existo
 				}
 			} 
-			else if (!tb.getActivo()) 
-			{
+			else if (!tb.getActivo()) {
 				tb.setActivo(true);
 				id = dao.update(tb);
 	
@@ -54,9 +53,11 @@ public class ASVehiculoImp implements ASVehiculo {
 					tr.commit();//correcto				
 				}
 			} 
-			else
+			else {
 				id = -3; // ese vehiculo ya existe
+				tr.rollback();
 			}
+		}
 		finally {
 			TransactionManager.getInstance().deleteTransaction();
 		}
@@ -69,30 +70,34 @@ public class ASVehiculoImp implements ASVehiculo {
 		DAOVehiculo dao = DaoFactory.getInstance().createDAOVehiculo();
 		
 		try {
-		TransactionManager.getInstance().newTransaction();
-		tr = TransactionManager.getInstance().getTransaction();
-		
-		tr.start();
-
-		TVehiculo tb = dao.read(id);
-
-		if (tb != null){
-			if (tb.getActivo()){
-				tb.setActivo(false);
-				id = dao.update(tb);
-				if (id == 0){
-					id = -1;//error al dar de baja a un vehiculo existente dado de alta
+			TransactionManager.getInstance().newTransaction();
+			tr = TransactionManager.getInstance().getTransaction();
+			
+			tr.start();
+	
+			TVehiculo tb = dao.read(id);
+	
+			if (tb != null){
+				if (tb.getActivo()){
+					tb.setActivo(false);
+					id = dao.update(tb);
+					if (id == 0){
+						id = -1;//error al dar de baja a un vehiculo existente dado de alta
+						tr.rollback();
+					}
+					else{
+						tr.commit(); //dado se baja correctamente
+					}
+				} 
+				else {
+					id = -2; // ya estaba dado de baja el vehiculo
 					tr.rollback();
 				}
-				else{
-					tr.commit(); //dado se baja correctamente
-				}
 			} 
-			else
-				id = -2; // ya estaba dado de baja el vehiculo
-		} 
-		else
-			id = -3; // ese vehiculo no exsite
+			else {
+				id = -3; // ese vehiculo no exsite
+				tr.rollback();
+			}
 		}
 		finally {
 			TransactionManager.getInstance().deleteTransaction();
@@ -130,17 +135,25 @@ public class ASVehiculoImp implements ASVehiculo {
 								tr.commit();//correcto
 							}
 						} 
-						else
+						else {
 							id = -2;//error al instanciar
+							tr.rollback();
+						}
 					} 
-					else
+					else {
 						id = -3; // no existe el vehiculo
+						tr.rollback();
+					}
 				} 
-				else
+				else {
 					id = -4; //esta de baja el vehiculo
+					tr.rollback();
+				}
 			} 
-			else
+			else {
 				id = -5; // no existe el vehiculo
+				tr.rollback();
+			}
 			}
 		finally {
 			TransactionManager.getInstance().deleteTransaction();
@@ -195,7 +208,7 @@ public class ASVehiculoImp implements ASVehiculo {
 	
 	
 	@Override
-	public int comprobarAutonomia(int id) throws Exception {//tiene que introducir el id //autonomia = numBaterias * 4 horas
+	public int comprobarAutonomia(int id) throws Exception {
 		int res = -1;
 		Transaction tr = null; 
 		DAOVehiculo dao = DaoFactory.getInstance().createDAOVehiculo();
@@ -208,6 +221,7 @@ public class ASVehiculoImp implements ASVehiculo {
 			
 			TVehiculo tb = dao.read(id);
 			
+			tr.commit();
 			if(tb != null){
 				res = tb.getNumBaterias() * 4;
 			}
@@ -220,10 +234,9 @@ public class ASVehiculoImp implements ASVehiculo {
 	}
 
 	@Override
-	public TVehiculo vehiculoMasAlquilado() {
+	public VIPResultado vehiculoMasAlquilado() {
 		Transaction tr = null;
-		TVehiculo vVIP = null;
-		
+		VIPResultado vip = null;
 		try {
 			TransactionManager.getInstance().newTransaction();
 			tr = TransactionManager.getInstance().getTransaction();
@@ -233,7 +246,7 @@ public class ASVehiculoImp implements ASVehiculo {
 			if(q != null) {
 				tr.start();
 				
-				vVIP = (TVehiculo) q.execute(null);
+				vip = (VIPResultado) q.execute(null);
 			
 				tr.commit();	
 			}
@@ -247,7 +260,7 @@ public class ASVehiculoImp implements ASVehiculo {
 		finally {
 			TransactionManager.getInstance().deleteTransaction();
 		}
-		return vVIP;
+		return vip;
 	}
 	
 }

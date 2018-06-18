@@ -37,20 +37,13 @@ public class TCoche extends TVehiculo {
             this.gps = gps;
     }
     public String toString(){
-		StringBuilder sb = new StringBuilder();
-		sb.append("Id: " + this.getId() + " ");
-		sb.append("Modelo coche: " + this.getModelo() + " ");
-		sb.append("Matricula: " + this.getMatricula() + " ");
-		/*sb.append("Color: " + this.getColor() + "\n");
-		sb.append("Numero Baterias: " + this.getNumBaterias() + "\n");
-		sb.append("Numero de puertas: " + this.getPuertas() + "\n");
-		sb.append("GPS: ");
-		sb.append(this.getGps());
-		sb.append("\n");
-		sb.append("Estado: ");
-		sb.append(this.getActivo());*/
-		sb.append("\n");
-		return sb.toString();
+    	String s = "";
+    	s += "COCHE " + "\n" +
+    	"PUERTAS: " + puertas + "\n" +
+    	"GPS: ";
+    	s += gps ? "SI \n" : "NO \n";
+    	s += super.toString();
+		return s;
 	}
 }
     

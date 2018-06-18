@@ -41,6 +41,10 @@ public class ClienteGUI extends javax.swing.JFrame {
         tarjetaTF.setText("");
     }
     
+    public void muestraTexto(String texto) {
+    	clienteTA.append(texto + "\n");
+  
+    }
     public void muestra(TCliente ...t) {
     	for (TCliente tCliente : t) {
 			clienteTA.append(tCliente.toString());

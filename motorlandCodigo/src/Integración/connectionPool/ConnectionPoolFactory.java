@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public abstract class ConnectionPoolFactory {
 	
-	private final String RUTA_FICHERO = "config/db_info";
+	private final String RUTA_FICHERO = "config/db_info.properties";
 	
 	private static ConnectionPoolFactory conPoolFactory;
 	

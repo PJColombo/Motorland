@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import Integración.query.VIPResultado;
 import Negocio.Vehiculo.TVehiculo;
 import Presentacion.comandos.listadecomandos.ListaComandos;
 import Presentacion.controlador.Context;
@@ -23,57 +24,85 @@ public class VistaMenuVehiculoImp extends VistaMenuVehiculo {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Vehiculo vVehiculos;
-	private static final String SEPARATOR = "----------------------------------";	
+	private VehiculoGUI vVehiculos;
 
 	public VistaMenuVehiculoImp(){
-		vVehiculos = new Vehiculo();
+		vVehiculos = new VehiculoGUI();
 	}
 
 
 	@Override
 	public void update(Context contexto) {
+		String mensaje = ""; 
+		int tipo = -1; 
 		if(contexto.getEvent() == ListaComandos.VISTAMENUVEHICULO){
 			vVehiculos.setVisible(true);
 		}
-		else if(contexto.getEvent() == ListaComandos.MOSTRARALTAVEHICULO){
-			String mensajeAlta ="";
+		else if(contexto.getEvent() == ListaComandos.MOSTRARALTAVEHICULO){			
 			switch((int)contexto.getData()){
-			case -1: mensajeAlta +="error al dar de alta a un vehiculo"; break;
-			case -2: mensajeAlta +="error al dar de alta a vehiculo existente pero dado de baja"; break;
-			case -3: mensajeAlta +="error, el vehiculo existe y esta dado de alta"; break;
-			default: mensajeAlta += "existo al dar de alta"; break;
+				case -1: mensaje +="error al dar de alta a un vehiculo"; 
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				case -2: mensaje +="error al dar de alta a vehiculo existente pero dado de baja"; 
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				case -3: mensaje +="error, el vehiculo existe y esta dado de alta"; 
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				default: mensaje += "existo al dar de alta"; 
+				tipo = JOptionPane.INFORMATION_MESSAGE;
+				break;
 			}
-			
+			JOptionPane.showMessageDialog(vVehiculos, mensaje, "Alta vehículo", 
+					tipo);
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARBAJAVEHICULO){
-			String mensajeBaja = "";
 			switch((int)contexto.getData()){
-			case -1: mensajeBaja +="error al dar de baja a un vehiculo existe dado de alta"; break;
-			case -2: mensajeBaja +="error ya esta dado de baja el vehiculo"; break;
-			case -3: mensajeBaja +="error, el vehiculo no existe"; break;
-			default: mensajeBaja += "existo al dar de baja"; break;
+				case -1: mensaje +="error al dar de baja a un vehiculo existe dado de alta"; 
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				case -2: mensaje +="error ya esta dado de baja el vehiculo"; 
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				case -3: mensaje +="error, el vehiculo no existe"; 
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				default: mensaje += "existo al dar de baja"; 
+				tipo = JOptionPane.INFORMATION_MESSAGE;
+				break;
 			}
-					
+			JOptionPane.showMessageDialog(vVehiculos, mensaje, "Baja vehículo", 
+					tipo);	
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARMODIFICARVEHICULO){
-			String mensajeModificar = "";
 			switch((int)contexto.getData()){
-			case -1: mensajeModificar +="error al actualizar un vehiculo dado de alta"; break;
-			case -2: mensajeModificar +="error al instanciar"; break;
-			case -3: mensajeModificar +="error, no existe el vehiculo"; break;
-			case -4: mensajeModificar +="error el vehiculo ya etsa dado de baja"; break;
-			default: mensajeModificar += "existo al dar de baja"; break;
+				case -1: mensaje +="error al actualizar un vehiculo dado de alta";
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				case -2: mensaje +="error al instanciar";
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				case -3: mensaje +="error, no existe el vehiculo"; 
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				case -4: mensaje +="error el vehiculo ya esta dado de baja"; 
+				tipo = JOptionPane.ERROR_MESSAGE;
+				break;
+				default: mensaje += "existo al dar de baja";
+				tipo = JOptionPane.INFORMATION_MESSAGE;
+				break;
 			}
-			
+			JOptionPane.showMessageDialog(vVehiculos, mensaje, "Modifica vehículo", 
+					tipo);	
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARBUSCARVEHICULO){
-			
-			if((TVehiculo)contexto.getData() != null){
-				vVehiculos.setComponentes((TVehiculo)contexto.getData());
+			TVehiculo v = (TVehiculo)contexto.getData();
+			if(v != null){
+				vVehiculos.muestra(v.toString());
 			}
 			else{
-				JOptionPane.showMessageDialog(null,"Error al consultar el vehiculo");
+				JOptionPane.showMessageDialog(vVehiculos,"El vehículo no existe.", "Consulta vehículo",
+						JOptionPane.ERROR_MESSAGE);
 			}
 			
 		}
@@ -81,23 +110,40 @@ public class VistaMenuVehiculoImp extends VistaMenuVehiculo {
 			@SuppressWarnings("unchecked")
 			ArrayList<TVehiculo> lista = ((ArrayList<TVehiculo>) contexto.getData());
 			if (lista.size() > 0){
-				String suma  = "";
-				for(int i = 0; i < lista.size(); i++){
-					suma += lista.get(i).toString() + VistaMenuVehiculoImp.SEPARATOR +"\n";
-					vVehiculos.setLista(lista.get(i).toString() + VistaMenuVehiculoImp.SEPARATOR +"\n");
+				for (TVehiculo v : lista) {
+					vVehiculos.muestra(v.toString());
 				}
-				vVehiculos.setLista(suma);
+			}
+			else {
+				JOptionPane.showMessageDialog(vVehiculos,"No hay vehículos para mostrar.", "Lista vehículos",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		}
 		else if(contexto.getEvent() == ListaComandos.MOSTRARCOMPROBARAUTONOMIA){
-			if(Integer.toString((int)contexto.getData()) != null){
-				vVehiculos.setAutonomia((int)contexto.getData());
+			String autonomia = Integer.toString((int)contexto.getData());
+			if(autonomia != null){
+				vVehiculos.muestra("AUTONOMÍA DEL VEHÍCULO: " + autonomia);
 			}
 			else{
-				JOptionPane.showMessageDialog(null,"Error al consultar el vehiculo");
+				JOptionPane.showMessageDialog(vVehiculos,"El vehículo no existe.", "Calcula autonomía", 
+						JOptionPane.ERROR_MESSAGE);
 			}		
 			
+		}
+		else if(contexto.getEvent() == ListaComandos.MOSTRAR_VEHICULO_MAS_ALQUILADO) {
+			VIPResultado res = (VIPResultado) contexto.getData();
+			TVehiculo v = (TVehiculo) res.getRes1();
+			int vecesAlquilado = (int) res.getRes2Valor();
+			
+			if(v != null)
+				vVehiculos.muestra(v.toString() + "\n" + "NÚMERO DE VECES ALQUILADO: " + vecesAlquilado);
+			else
+				JOptionPane.showMessageDialog(vVehiculos,"No hay vehículos existentes.", "Vehículo VIP", 
+						JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if(contexto.getEvent() == ListaComandos.CERRAR_VISTA_VEHICULO) {
+			vVehiculos.setVisible(false);
 		}
 	}
 }

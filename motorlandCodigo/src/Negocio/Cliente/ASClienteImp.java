@@ -4,13 +4,14 @@
 package Negocio.Cliente;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 import Integración.Cliente.DAOCliente;
 import Integración.DAOFactory.DaoFactory;
 import Integración.Transaction.Transaction;
 import Integración.Transaction.TransactionManager;
 import Integración.query.Query;
+import Integración.query.VIPResultado;
 import Integración.queryFactory.QueryFactory;
 
 /** 
@@ -199,9 +200,9 @@ public class ASClienteImp implements ASCliente {
 	}
 
 	@Override
-	public TCliente clienteVip() throws Exception {
+	public List<VIPResultado> clienteVip() throws Exception {
 		Transaction tr;
-		TCliente vip = null;
+		List<VIPResultado> vip = null;
 		Query q = null; 
 		try {
 			TransactionManager.getInstance().newTransaction();
@@ -213,7 +214,7 @@ public class ASClienteImp implements ASCliente {
 			if(q != null) {
 				tr.start();
 				
-				vip = (TCliente) q.execute(null);
+				vip = (ArrayList<VIPResultado>) q.execute(null);
 				
 				tr.commit();
 			}

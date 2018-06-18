@@ -8,7 +8,8 @@ public abstract class CommandFactory {
 
 	public static CommandFactory getInstance() {
 		if (commandFactory == null)
-			commandFactory = new CommandFactoryImp();
+			//commandFactory = new CommandFactoryImp();
+			commandFactory = new CommandFactoryCargaDinamicaImp();
 		return commandFactory;
 	}
 

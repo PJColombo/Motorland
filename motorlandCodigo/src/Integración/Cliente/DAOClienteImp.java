@@ -287,9 +287,6 @@ public class DAOClienteImp implements DAOCliente {
 		Connection cn = null;
 		
 		try {
-			/*cn = DriverManager.getConnection("jdbc:mysql://" +
-					"den1.mysql3.gear.host:3306/motorlanddb?autoReconnect=true&useSSL=true","motorlanddb",	"123-abc");
-			*/
 			cn = ConnectionPoolFactory.getInstance().getConnection();
 			cn.setAutoCommit(false);
 		}

@@ -55,6 +55,7 @@ public class DispatcherImp extends Dispatcher {
 				VistaPrincipal.getInstance().update(context);
 			break;
 			//VISTA VEHICULO
+			
 			case ListaComandos.VISTAMENUVEHICULO:
 			case ListaComandos.MOSTRARALTAVEHICULO:
 			case ListaComandos.MOSTRARBAJAVEHICULO:
@@ -62,9 +63,14 @@ public class DispatcherImp extends Dispatcher {
 			case ListaComandos.MOSTRARMODIFICARVEHICULO:
 			case ListaComandos.MOSTRARLISTAVEHICULO:
 			case ListaComandos.MOSTRARCOMPROBARAUTONOMIA:
+			case ListaComandos.MOSTRAR_VEHICULO_MAS_ALQUILADO:
 				VistaMenuVehiculo.getInstance().update(context);
 			break;
 			
+			case ListaComandos.CERRAR_VISTA_VEHICULO:
+				VistaMenuVehiculo.getInstance().update(context);
+				VistaPrincipal.getInstance().update(context);
+			break;
 			//VISTA ALQUILER
 			case ListaComandos.VISTAMENUALQUILER:
 			case ListaComandos.CERRAR_ALTA_ALQUILER_EMERGENTE:

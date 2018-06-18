@@ -4,6 +4,9 @@
 package Negocio.Cliente;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import Integración.query.VIPResultado;
 
 
 
@@ -20,5 +23,5 @@ public interface ASCliente {
     public TCliente detalleCliente(int id) throws Exception;
     public ArrayList<TCliente> listaCliente() throws Exception;
     public int eliminaCliente(int id); 
-	public TCliente clienteVip() throws Exception;
+	public List<VIPResultado> clienteVip() throws Exception;
 }

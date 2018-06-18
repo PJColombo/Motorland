@@ -50,7 +50,7 @@ public class ConnectionPoolFactoryImp extends ConnectionPoolFactory {
 			createConnections();
 			conn = pool.poll(); 
 		}
-		System.out.println(pool.size());
+		System.out.println("Numero de conexiones: " + pool.size());
 		return conn;
 	}
 
@@ -58,6 +58,7 @@ public class ConnectionPoolFactoryImp extends ConnectionPoolFactory {
 
 	@Override
 	public void closeConnections() throws SQLException {
+		System.out.println("Cerrando numero de conexiones: " + pool.size());
 		for (int i = 0; i < pool.size(); i++)
 			pool.poll().close();
 	}
